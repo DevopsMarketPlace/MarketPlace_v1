@@ -1,8 +1,6 @@
 package com.iiitb.spe.market_place_v1.Store;
 
 import com.iiitb.spe.market_place_v1.Address.Address;
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 
