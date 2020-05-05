@@ -1,6 +1,11 @@
 package com.iiitb.spe.market_place_v1.Customer;
 
+import com.iiitb.spe.market_place_v1.Address.Address;
+import com.iiitb.spe.market_place_v1.Product.Product;
+import com.iiitb.spe.market_place_v1.Product.ProductStore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Customer {
@@ -19,6 +24,29 @@ public class Customer {
 
     @Column(length = 15,nullable = false)
     private String password;
+
+    @OneToMany //extra relation
+    @JoinTable(name="address_customer")
+    private List<Address> addressList;
+
+    @OneToMany(mappedBy="customer")
+    private List<CustomerProduct> customerProductList;
+
+    public List<CustomerProduct> getCustomerProductList() {
+        return customerProductList;
+    }
+
+    public void setCustomerProductList(List<CustomerProduct> customerProductList) {
+        this.customerProductList = customerProductList;
+    }
+
+    public List<Address> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<Address> addressList) {
+        this.addressList = addressList;
+    }
 
     public  Customer(){
 

@@ -1,9 +1,12 @@
 package com.iiitb.spe.market_place_v1.Address;
 
+import com.iiitb.spe.market_place_v1.Customer.Customer;
+import com.iiitb.spe.market_place_v1.Store.Store;
+
 import javax.persistence.*;
 
 @Entity
-@Embeddable
+
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,9 +24,25 @@ public class Address {
     @Column(nullable = false)
     private  double lon;
 
+//    @ManyToOne
+//    @JoinColumn(name="customer_id")
+//    private Customer customer;
+    @OneToOne(mappedBy = "address")
+    private Store store;
+
+
     public Address(){
 
     }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
     public Address(String houseno, String pincode, String city, String state, double lat, double lon) {
         this.houseno = houseno;
         this.pincode = pincode;

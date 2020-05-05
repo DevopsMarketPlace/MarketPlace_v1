@@ -1,8 +1,11 @@
 package com.iiitb.spe.market_place_v1.Store;
 
 import com.iiitb.spe.market_place_v1.Address.Address;
+import com.iiitb.spe.market_place_v1.Product.Product;
+import com.iiitb.spe.market_place_v1.Product.ProductStore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Store {
@@ -10,19 +13,26 @@ public class Store {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int sid;
 
-    @Embedded
-    private Address Address;
-
     @Column(length = 100, nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "store")
+    private List<ProductStore> productStoreList;
+    @OneToOne
+    @JoinColumn(name="address_id")
+    private Address address;
+
 
     public Store(){
 
     }
 
-    public Store(com.iiitb.spe.market_place_v1.Address.Address address, String name) {
-        Address = address;
-        this.name = name;
+    public List<ProductStore> getProductStoreList() {
+        return productStoreList;
+    }
+
+    public void setProductStoreList(List<ProductStore> productStoreList) {
+        this.productStoreList = productStoreList;
     }
 
     public int getSid() {
@@ -33,12 +43,12 @@ public class Store {
         this.sid = sid;
     }
 
-    public com.iiitb.spe.market_place_v1.Address.Address getAddress() {
-        return Address;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddress(com.iiitb.spe.market_place_v1.Address.Address address) {
-        Address = address;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getName() {
