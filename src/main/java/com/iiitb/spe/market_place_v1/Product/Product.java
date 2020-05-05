@@ -1,6 +1,10 @@
 package com.iiitb.spe.market_place_v1.Product;
 
+import com.iiitb.spe.market_place_v1.Customer.CustomerProduct;
+import com.iiitb.spe.market_place_v1.Store.Store;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -15,16 +19,34 @@ public class Product {
     private String description;
     @Column(nullable = false)
     private double disprice;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProductStore> productStoreList;
+
+    @OneToMany(mappedBy = "product")
+    private List<CustomerProduct> customerProductList;
+
     public Product(){
 
     }
 
-    public Product(String productname, double pprice, String description, double disprice) {
-        this.productname = productname;
-        this.pprice = pprice;
-        this.description = description;
-        this.disprice = disprice;
+    public List<ProductStore> getProductStoreList() {
+        return productStoreList;
     }
+
+    public void setProductStoreList(List<ProductStore> productStoreList) {
+        this.productStoreList = productStoreList;
+    }
+
+    public List<CustomerProduct> getCustomerProductList() {
+        return customerProductList;
+    }
+
+    public void setCustomerProductList(List<CustomerProduct> customerProductList) {
+        this.customerProductList = customerProductList;
+    }
+
+
 
     public int getPid() {
         return pid;
