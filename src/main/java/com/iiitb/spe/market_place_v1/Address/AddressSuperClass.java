@@ -6,8 +6,7 @@ import javax.persistence.*;
 @Embeddable
 public class AddressSuperClass {
 
-    @Column(length = 100, nullable = false)
-    private String houseno;
+
     @Column(length = 6 , nullable = false)
     private String pincode;
     @Column(length = 100, nullable = false)
@@ -19,13 +18,7 @@ public class AddressSuperClass {
     @Column(nullable = false)
     private  double lon;
 
-    public String getHouseno() {
-        return houseno;
-    }
 
-    public void setHouseno(String houseno) {
-        this.houseno = houseno;
-    }
 
     public String getPincode() {
         return pincode;

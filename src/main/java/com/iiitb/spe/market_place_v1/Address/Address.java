@@ -12,6 +12,10 @@ public class Address extends AddressSuperClass{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int aid;
+    @Column(length = 100, nullable = false)
+    private String houseno;
+
+
 
 
 //    @ManyToOne
@@ -22,6 +26,14 @@ public class Address extends AddressSuperClass{
 
     public Address(){
 
+    }
+
+    public String getHouseno() {
+        return houseno;
+    }
+
+    public void setHouseno(String houseno) {
+        this.houseno = houseno;
     }
 
     public int getAid() {
