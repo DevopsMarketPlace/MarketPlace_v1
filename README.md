@@ -16,3 +16,17 @@ No more peak hour rushes. No waiting in long queues for billing.
 Our Web app allows sellers to register their shops and manage the inventory hassle-free. This way the rush gets reduced in their store.
 Our Web app helps to Schedule the time slots for pick-up and home delivery(optional). Provides sellers to generate the bill of sold items.
 
+## Api's Description :
+
+### /products :
+Get List of Products from Product table 
+### /product/{pid} :
+Get,Delete specific product using pid
+### /product with RequestBody
+Post new product data to database
+### /product/{pid} with RequestBody
+Update specific product using pid
+### /product/store/{pid}
+Get all the stores which has specific product
+
+
