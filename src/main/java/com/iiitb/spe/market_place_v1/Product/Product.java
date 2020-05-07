@@ -1,5 +1,6 @@
 package com.iiitb.spe.market_place_v1.Product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.spe.market_place_v1.Order.OrderProduct;
 
 import javax.persistence.*;
@@ -18,10 +19,12 @@ public class Product {
     private String description;
     @Column(nullable = false)
     private double disprice;
-
+    @JsonIgnore
+    // To Fetch product by Kavish
     @OneToMany(mappedBy = "product")
     private List<ProductStore> productStoreList;
-
+    @JsonIgnore
+    // To Fetch product by Kavish
     @OneToMany(mappedBy = "product")
     private List<OrderProduct> orderProductList;
 

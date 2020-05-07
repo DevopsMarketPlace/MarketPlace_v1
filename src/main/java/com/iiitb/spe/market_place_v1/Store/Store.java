@@ -1,5 +1,4 @@
 package com.iiitb.spe.market_place_v1.Store;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.spe.market_place_v1.Address.Address;
@@ -53,7 +52,7 @@ public class Store {
     private List<ProductStore> productStoreList;
 
 
-    @JsonIgnore //for fetching stores due to lazy fetch--aayush
+    @JsonIgnore
     @OneToMany(mappedBy = "store")
     private List<Order> orderList;
 
