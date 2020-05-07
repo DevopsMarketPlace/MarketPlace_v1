@@ -1,5 +1,6 @@
 package com.iiitb.spe.market_place_v1.Store;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.spe.market_place_v1.Address.Address;
 import com.iiitb.spe.market_place_v1.Address.AddressSuperClass;
 import com.iiitb.spe.market_place_v1.Order.Order;
@@ -22,10 +23,12 @@ public class Store {
     @Embedded
     private AddressSuperClass address;
 
+    @JsonIgnore //for fetching stores due to lazy fetch--aayush
     @OneToMany(mappedBy = "store")
     private List<ProductStore> productStoreList;
 
 
+    @JsonIgnore //for fetching stores due to lazy fetch--aayush
     @OneToMany(mappedBy = "store")
     private List<Order> orderList;
 
