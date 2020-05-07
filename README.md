@@ -22,11 +22,11 @@ Our Web app helps to Schedule the time slots for pick-up and home delivery(optio
 Get List of Products from Product table 
 ### /product/{pid} :
 Get,Delete specific product using pid
-### /product with RequestBody
+### /product with RequestBody :
 Post new product data to database
-### /product/{pid} with RequestBody
+### /product/{pid} with RequestBody :
 Update specific product using pid
-### /product/store/{pid}
+### /product/store/{pid} :
 Get all the stores which has specific product
 
 
