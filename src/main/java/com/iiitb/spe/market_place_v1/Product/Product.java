@@ -1,7 +1,6 @@
 package com.iiitb.spe.market_place_v1.Product;
 
-import com.iiitb.spe.market_place_v1.Customer.CustomerProduct;
-import com.iiitb.spe.market_place_v1.Store.Store;
+import com.iiitb.spe.market_place_v1.Order.OrderProduct;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,7 +23,7 @@ public class Product {
     private List<ProductStore> productStoreList;
 
     @OneToMany(mappedBy = "product")
-    private List<CustomerProduct> customerProductList;
+    private List<OrderProduct> orderProductList;
 
     public Product(){
 
@@ -38,12 +37,12 @@ public class Product {
         this.productStoreList = productStoreList;
     }
 
-    public List<CustomerProduct> getCustomerProductList() {
-        return customerProductList;
+    public List<OrderProduct> getOrderProductList() {
+        return orderProductList;
     }
 
-    public void setCustomerProductList(List<CustomerProduct> customerProductList) {
-        this.customerProductList = customerProductList;
+    public void setOrderProductList(List<OrderProduct> orderProductList) {
+        this.orderProductList = orderProductList;
     }
 
 

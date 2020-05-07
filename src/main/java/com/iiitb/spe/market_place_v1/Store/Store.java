@@ -1,6 +1,8 @@
 package com.iiitb.spe.market_place_v1.Store;
 
 import com.iiitb.spe.market_place_v1.Address.Address;
+import com.iiitb.spe.market_place_v1.Address.AddressSuperClass;
+import com.iiitb.spe.market_place_v1.Order.Order;
 import com.iiitb.spe.market_place_v1.Product.Product;
 import com.iiitb.spe.market_place_v1.Product.ProductStore;
 
@@ -16,11 +18,16 @@ public class Store {
     @Column(length = 100, nullable = false)
     private String name;
 
+
+    @Embedded
+    private AddressSuperClass address;
+
     @OneToMany(mappedBy = "store")
     private List<ProductStore> productStoreList;
-    @OneToOne
-    @JoinColumn(name="address_id")
-    private Address address;
+
+
+    @OneToMany(mappedBy = "store")
+    private List<Order> orderList;
 
 
     public Store(){
@@ -43,11 +50,11 @@ public class Store {
         this.sid = sid;
     }
 
-    public Address getAddress() {
+    public AddressSuperClass getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressSuperClass address) {
         this.address = address;
     }
 
@@ -57,5 +64,13 @@ public class Store {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 }
