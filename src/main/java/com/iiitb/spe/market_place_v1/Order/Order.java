@@ -20,7 +20,7 @@ public class Order {
     private Date dateOfOrder;
 
     @Column(name="status",nullable = false)
-    private byte status; //1-placed ,2:- delevered, 3:-in processing
+    private byte status; //1-placed ,2:- in processing, 3:-in delivered
 
     @ManyToOne
     @JoinColumn(name="customer_id")
