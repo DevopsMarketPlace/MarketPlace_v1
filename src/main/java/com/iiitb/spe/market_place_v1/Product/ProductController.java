@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+//import com.iiitb.spe.market_place_v1.Exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,49 +18,77 @@ import com.iiitb.spe.market_place_v1.Store.Store;
 
 
 
+
+
 @RestController
 public class ProductController {
 	
 	@Autowired
-	ProductRepo repo;
+	ProductService productService;
 	
 	@GetMapping("/products")
-	public List<Product> getProducts()
+	public List<Product> getAllProducts()
 	{
-		return repo.findAll();
+		return productService.fetchAllProducts();
 	}
 	
 	@GetMapping("/products/{pid}")
-	public Optional<Product> getproduct(@PathVariable int pid)
+	public Product getproduct(@PathVariable int pid)
 	{
-		return repo.findById(pid);
+		Product getProduct = productService.fetchProductById(pid);
+		if(getProduct==null)
+		{
+//			 throw new NotFoundException("Provided product not found");
+		}
+		return getProduct;
 	}
 	
 	@PostMapping("/product")
-	public String setProduct(@RequestBody Product product)
+	public int createProduct(@RequestBody Product product)
 	{
-		repo.save(product);
-		return "Saved Successfully";
+		Product newProduct=productService.createNewProduct(product);
+		return newProduct.getPid();
 	}
 	
 	@PutMapping("/product/{pid}")
-	public String putProduct(@RequestBody Product product)
+	public Product updateProduct(@PathVariable int pid,@RequestBody Product product)
 	{
-		repo.save(product);
-		return "Updated Successfully";
+		  Product getProduct=productService.fetchProductById(pid);
+		  if(getProduct==null)
+	      {
+//	            throw new NotFoundException("Requested product not found");
+	      }
+		return productService.updateProduct(product,getProduct);
 	}
 	
 	@DeleteMapping("/product/{pid}")
 	public String deleteProduct(@PathVariable int pid)
 	{
-		repo.deleteById(pid);
-		return "Deleted Successfully";
+		 Product getProduct=productService.fetchProductById(pid);
+	        if(getProduct==null)
+	        {
+//	            throw new NotFoundException("Provided product not found");
+	        }
+	        productService.removeProduct(getProduct);
+	        return "Successfully deleted";
 	}
 	
-	@GetMapping("/product/store/{pid}")
-	public List<Store> getStores(@PathVariable  int pid)
+	@GetMapping("/product/product/{pid}")
+	public List<Store> getproducts(@PathVariable  int pid)
 	{
-		return repo.getStoreList(pid).getProductStoreList().parallelStream().map(x-> x.getStore()).collect(Collectors.toList());
+		 Product response = productService.fetchProductById(pid);
+	        if (response == null) {
+//	            throw new NotFoundException("Provided Product not found");
+	        }
+
+	        Product result=productService.fetchStoreList(pid);
+	        if(result==null)
+	        {
+//	            throw new NotFoundException("No products found for product" + response.getName());
+	        }
+
+	        return result.getProductStoreList().parallelStream().map(x->x.getStore()).collect(Collectors.toList());
+
+	    }
+
 	}
-	
-}
