@@ -22,6 +22,11 @@ public class CustomerService {
         customerRepo.delete(existingCustomer);
     }
     public Customer fetchOrderList(int id){
-        return customerRepo.fetchOrders(id);
+        return customerRepo.fetchOrders(id).orElse(null);
     }
+
+    public Customer fetchbyUsername(String uname){
+        return customerRepo.findByUsername(uname).orElse(null);
+    }
+
 }

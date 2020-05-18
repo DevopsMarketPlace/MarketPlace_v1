@@ -13,9 +13,13 @@ public class CustomerController {
     private  CustomerService customerService;
 
    @PostMapping("/customer")
-    public int addCustomer(@RequestBody Customer customer){
-       Customer newCustomer = customerService.addCustomer(customer);
-       return  newCustomer.getUid();
+    public String addCustomer(@RequestBody Customer customer){
+       Customer check = customerService.fetchbyUsername(customer.getUsername());
+       if(check== null) {
+           Customer newCustomer = customerService.addCustomer(customer);
+            return "Successfully added";
+       }
+       return "Username alredy taken! try another one";
    }
 
    @DeleteMapping("/customer")
