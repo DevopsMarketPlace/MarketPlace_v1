@@ -23,7 +23,7 @@ public class CustomerController {
        Customer getCustomer = customerService.fetchCustomer(uid);
 
        if(getCustomer== null){
-           return "No Such Entry";
+           return "No Such customer Entry found";
        }
        customerService.deletecustomer(getCustomer);
        return "Successfully deleted";
@@ -37,4 +37,5 @@ public class CustomerController {
        }
        return result;
    }
+
 }
