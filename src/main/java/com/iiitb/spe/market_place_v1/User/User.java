@@ -12,7 +12,7 @@ public class User {
     private String firstname;
     @Column(length = 100,nullable = false)
     private String lastname;
-    @Column(length = 10,nullable = false, unique = true)
+    @Column(length = 10,nullable = false)
     private String contactno;
 
     @Column(length = 15,unique = true, nullable = false)
