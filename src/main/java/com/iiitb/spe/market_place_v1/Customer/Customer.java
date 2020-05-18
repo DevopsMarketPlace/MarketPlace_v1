@@ -1,6 +1,7 @@
 package com.iiitb.spe.market_place_v1.Customer;
 
 import com.iiitb.spe.market_place_v1.Address.Address;
+import com.iiitb.spe.market_place_v1.CustomerStoreSlots.Slots;
 import com.iiitb.spe.market_place_v1.Order.OrderProduct;
 import com.iiitb.spe.market_place_v1.Order.Order;
 import com.iiitb.spe.market_place_v1.User.User;
@@ -17,6 +18,9 @@ public class Customer extends User {
 
     @OneToMany(mappedBy = "customer")
     private List<Order>orderList;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Slots> slotsList;
 
     public Customer() {
         super();
