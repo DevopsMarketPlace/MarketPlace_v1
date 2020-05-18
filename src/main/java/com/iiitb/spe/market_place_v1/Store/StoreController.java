@@ -1,6 +1,6 @@
 package com.iiitb.spe.market_place_v1.Store;
 
-import com.iiitb.spe.market_place_v1.Exceptions.NotFoundException;
+import com.iiitb.custom_ebook.ebook.Exceptions.NotFoundException;
 import com.iiitb.spe.market_place_v1.Order.Order;
 import com.iiitb.spe.market_place_v1.Product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class StoreController {
     @PutMapping("/store")//ok tested
     public Store updateStore(@RequestBody Store store,@RequestParam("sid") int sid)
     {
-        Store getStore=storeService.fetchSpecificStore(sid);
+        Store getStore=storeService.fetchStoreById(sid);
         if(getStore==null)
         {
             throw new NotFoundException("Requested Store not found");
@@ -37,7 +37,7 @@ public class StoreController {
     @DeleteMapping("/store") //ok tested
     public String deleteStore(@RequestParam("sid") int sid)
     {
-        Store getStore=storeService.fetchSpecificStore(sid);
+        Store getStore=storeService.fetchStoreById(sid);
         if(getStore==null)
         {
             throw new NotFoundException("Provided store not found");
@@ -49,7 +49,7 @@ public class StoreController {
     @GetMapping("/store/order")//ok tested
     public List<Order> getOrders(@RequestParam("sid") int sid)
     {
-        Store getStore=storeService.fetchSpecificStore(sid);
+        Store getStore=storeService.fetchStoreById(sid);
         if(getStore==null)
         {
             throw new NotFoundException("Provided store not found");
@@ -74,7 +74,7 @@ public class StoreController {
     public Store getSpecificStore(@RequestParam("sid") int sid)
     {
 
-        Store response = storeService.fetchSpecificStore(sid);
+        Store response = storeService.fetchStoreById(sid);
         if (response == null) {
             throw new NotFoundException("Provided Store not found");
         }
@@ -99,7 +99,7 @@ public class StoreController {
     @GetMapping("/store/products")//ok tested
     public List<Product> getProducts(@RequestParam("sid") int sid)
     {
-        Store response = storeService.fetchSpecificStore(sid);
+        Store response = storeService.fetchStoreById(sid);
         if (response == null) {
             throw new NotFoundException("Provided store not found");
         }

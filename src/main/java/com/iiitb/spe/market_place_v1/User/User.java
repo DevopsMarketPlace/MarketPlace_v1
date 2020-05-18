@@ -21,6 +21,8 @@ public class User {
     @Column(length = 15,nullable = false)
     private String password;
 
+    //role  ROLE_CUSTOMER ROLE_MANAGER ROLE_ADMIN
+
     public User() {
     }
 

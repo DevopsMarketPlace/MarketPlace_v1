@@ -37,7 +37,7 @@ public class StoreService {
         storeRepository.findAll().forEach(response::add);
         return response;
     }
-    public Store fetchSpecificStore(int id)  {
+    public Store fetchStoreById(int id)  {
 
 
         return storeRepository.findById(id).orElse(null);
