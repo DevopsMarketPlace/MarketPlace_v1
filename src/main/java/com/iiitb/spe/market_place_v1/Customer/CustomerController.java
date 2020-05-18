@@ -24,15 +24,12 @@ public class CustomerController {
        return "Username already taken! try another one";
    }
    // Delete the record of the existing customer -- ok Tested
-
    @DeleteMapping("/customer")
     public String deleteCustomer(@RequestParam("uid") int uid){
        Customer getCustomer = customerService.fetchCustomer(uid);
 
        if(getCustomer== null){
-
            return "No Such customer Entry found to delete";
-
        }
        customerService.deletecustomer(getCustomer);
        return "Successfully deleted";
@@ -44,7 +41,6 @@ public class CustomerController {
        Customer result = customerService.fetchCustomer(uid);
        if(result==null){
            throw new NotFoundException("Customer with the provided id doesn't exist");
-
        }
        return result;
    }
@@ -75,6 +71,7 @@ public class CustomerController {
        }
        return result.getOrderList();
    }
+
 
 
 }
