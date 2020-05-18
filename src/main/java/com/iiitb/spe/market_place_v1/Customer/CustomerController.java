@@ -1,35 +1,40 @@
 package com.iiitb.spe.market_place_v1.Customer;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.DefaultEditorKit;
 import java.util.Optional;
 
 @RestController
 public class CustomerController {
+   @Autowired
+    private  CustomerService customerService;
 
-    @Autowired
-    CustomerRepo repo;
-    @GetMapping("/Customer/{uid}")
-    public Optional<Customer> getCustomer(@PathVariable int uid)
-    {
-        return repo.findById(uid);
-    }
+   @PostMapping("/customer")
+    public int addCustomer(@RequestBody Customer customer){
+       Customer newCustomer = customerService.addCustomer(customer);
+       return  newCustomer.getUid();
+   }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/Customer")
-    public String addcustomer(@RequestBody Customer customer){
-        repo.save(customer);
-        return "Registered Successfully";
-    }
-    @RequestMapping(method = RequestMethod.PUT, value = "/Customer/{uid}")
-    public String updatecustomer(@RequestBody Customer customer, @PathVariable int uid){
-        repo.save(customer);
-        return "Updated Successfully";
-    }
+   @DeleteMapping("/customer")
+    public String deleteCustomer(@RequestParam("uid") int uid){
+       Customer getCustomer = customerService.fetchCustomer(uid);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/Customer/{uid}")
-    public String deletecustomer(@RequestBody Customer customer, @PathVariable int uid){
-          repo.deleteById(uid);
-          return "Removed Successfully";
-    }
+       if(getCustomer== null){
+           return "No Such Entry";
+       }
+       customerService.deletecustomer(getCustomer);
+       return "Successfully deleted";
+   }
+
+   @GetMapping("/customer")
+    public Customer getSpecificCustomer(@RequestParam("uid") int uid){
+       Customer result = customerService.fetchCustomer(uid);
+       if(result==null){
+           return result;
+       }
+       return result;
+   }
 }
