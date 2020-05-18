@@ -1,6 +1,6 @@
 package com.iiitb.spe.market_place_v1.Store;
 
-import com.iiitb.custom_ebook.ebook.Exceptions.NotFoundException;
+import com.iiitb.spe.market_place_v1.Exceptions.NotFoundException;
 import com.iiitb.spe.market_place_v1.Order.Order;
 import com.iiitb.spe.market_place_v1.Product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
