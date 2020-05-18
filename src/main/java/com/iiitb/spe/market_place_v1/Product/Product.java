@@ -28,6 +28,12 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<OrderProduct> orderProductList;
 
+    public Product(String productname, double pprice, double disprice) {
+        this.productname = productname;
+        this.pprice = pprice;
+        this.disprice = disprice;
+    }
+
     public Product(){
 
     }

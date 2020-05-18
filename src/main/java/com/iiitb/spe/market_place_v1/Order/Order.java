@@ -4,7 +4,7 @@ import com.iiitb.spe.market_place_v1.Customer.Customer;
 import com.iiitb.spe.market_place_v1.Store.Store;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -17,10 +17,10 @@ public class Order {
 
     @Temporal(value = TemporalType.DATE)
     @Column(name="dateoforder",nullable = false)
-    private Date dateOfOrder;
+    private LocalDateTime dateOfOrder;
 
     @Column(name="status",nullable = false)
-    private byte status; //1-placed ,2:- in processing, 3:-in delivered
+    private byte status; //1-placed , 2:-in processing, 3:- delivered,;
 
     @ManyToOne
     @JoinColumn(name="customer_id")
@@ -44,11 +44,11 @@ public class Order {
         this.oid = oid;
     }
 
-    public Date getDateOfOrder() {
+    public LocalDateTime getDateOfOrder() {
         return dateOfOrder;
     }
 
-    public void setDateOfOrder(Date dateOfOrder) {
+    public void setDateOfOrder(LocalDateTime dateOfOrder) {
         this.dateOfOrder = dateOfOrder;
     }
 
