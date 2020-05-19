@@ -9,12 +9,12 @@ public class OrderController{
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/order")
+    @PostMapping(value = "/order")
     public void MakeOrder(@RequestBody Demo demo){
         orderService.makeorder(demo);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/order/{oid}")
+    @DeleteMapping(value = "/order/{oid}")
     public void DeleteOrder(@PathVariable int oid){
         orderService.deleteOrder(oid);
     }

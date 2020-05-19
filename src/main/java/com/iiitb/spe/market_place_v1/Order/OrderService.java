@@ -2,6 +2,7 @@ package com.iiitb.spe.market_place_v1.Order;
 
 
 import com.iiitb.spe.market_place_v1.Customer.Customer;
+import com.iiitb.spe.market_place_v1.Customer.CustomerService;
 import com.iiitb.spe.market_place_v1.Store.Store;
 import com.iiitb.spe.market_place_v1.Store.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class OrderService {
     @Autowired
     StoreService storeService;
 
+    @Autowired
+    CustomerService customerService;
+
     private List<Order> orders = new ArrayList<>();
 
     //@Autowired
@@ -34,17 +38,13 @@ public class OrderService {
         order.setStatus((byte) 1);
         Store store = storeService.fetchStoreById(demo.getSid());
         order.setStore(store);
-        //Customer cust = customerService.fetchCustomerId(demo.getCid());
-        //same for product;
+        Customer customer = customerService.fetchCustomer(demo.getCid());
+        order.setCustomer(customer);
         orderRepository.save(order);
     }
 
 
     public void deleteOrder(int oid) {
-        //List<Order> orders = new ArrayList<>();
         orderRepository.deleteById(oid);
-        //orderRepositroy.findAll().forEach(orders::add);
-        //this.orders.removeIf(order -> Objects.equals(order.getOid(), oid));
-
     }
 }
