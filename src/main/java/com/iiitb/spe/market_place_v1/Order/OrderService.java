@@ -17,7 +17,7 @@ public class OrderService {
 
 
     @Autowired
-    OrderRepositroy orderRepositroy;
+    OrderRepository orderRepository;
 
     @Autowired
     StoreService storeService;
@@ -36,14 +36,15 @@ public class OrderService {
         order.setStore(store);
         //Customer cust = customerService.fetchCustomerId(demo.getCid());
         //same for product;
-        orderRepositroy.save(order);
+        orderRepository.save(order);
     }
 
 
     public void deleteOrder(int oid) {
         //List<Order> orders = new ArrayList<>();
-        orderRepositroy.findAll().forEach(orders::add);
-        this.orders.removeIf(order -> Objects.equals(order.getOid(), oid));
+        orderRepository.deleteById(oid);
+        //orderRepositroy.findAll().forEach(orders::add);
+        //this.orders.removeIf(order -> Objects.equals(order.getOid(), oid));
 
     }
 }
