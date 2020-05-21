@@ -15,6 +15,8 @@ public class Address extends AddressSuperClass{
     @Column(length = 100, nullable = false)
     private String houseno;
 
+    //primary
+
 
 
 

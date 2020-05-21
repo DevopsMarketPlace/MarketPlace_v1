@@ -1,5 +1,6 @@
 package com.iiitb.spe.market_place_v1.StoreManager;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.spe.market_place_v1.Store.Store;
 import com.iiitb.spe.market_place_v1.User.User;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 public class StoreManager extends User {
 
+    @JsonIgnore
     @OneToMany(mappedBy = "storeManager")
     private List<Store> storeList;
 

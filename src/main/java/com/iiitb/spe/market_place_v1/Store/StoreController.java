@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin("*")
 public class StoreController {
     @Autowired
     private StoreService storeService;
@@ -63,6 +64,7 @@ public class StoreController {
     }
 
     @GetMapping("/stores")//ok tested
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<Store> getAllStores()
     {
 
@@ -70,8 +72,8 @@ public class StoreController {
 
     }
 
-    @GetMapping("/store") //ok tested
-    public Store getSpecificStore(@RequestParam("sid") int sid)
+    @GetMapping("/store/{sid}") //ok tested
+    public Store getSpecificStore(@PathVariable("sid") int sid)
     {
 
         Store response = storeService.fetchStoreById(sid);
@@ -112,6 +114,12 @@ public class StoreController {
 
         return result.getProductStoreList().parallelStream().map(x->x.getProduct()).collect(Collectors.toList());
 
+    }
+    @GetMapping("/test")// ok tested
+    public List<Store> test()
+    {
+        System.out.println("hello");
+        return storeService.fetchAllStores();
     }
 
 }

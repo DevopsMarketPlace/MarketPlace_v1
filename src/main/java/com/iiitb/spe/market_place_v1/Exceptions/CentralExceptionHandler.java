@@ -20,14 +20,14 @@ public class CentralExceptionHandler extends ResponseEntityExceptionHandler {
 
 
     }
-//    @ExceptionHandler(FoundException.class)
-//    public ResponseEntity<CustomError> resourceFoundError(FoundException e)
-//    {
-//        CustomError err=new CustomError(HttpStatus.FOUND,e.getMessage());
-//        HttpHeaders h=new HttpHeaders();
-//        h.set("Error-status","AlREADY FOUND");
-//        return new ResponseEntity<CustomError>(err,h,HttpStatus.FOUND);
-//    }
+    @ExceptionHandler(FoundException.class)
+    public ResponseEntity<CustomError> resourceFoundError(FoundException e)
+    {
+        CustomError err=new CustomError(HttpStatus.FOUND,e.getMessage());
+        HttpHeaders h=new HttpHeaders();
+        h.set("Error-status","AlREADY FOUND");
+        return new ResponseEntity<CustomError>(err,h,HttpStatus.FOUND);
+    }
 @ExceptionHandler(Exception.class)
 public ResponseEntity<CustomError>generalException(Exception e)
 {
