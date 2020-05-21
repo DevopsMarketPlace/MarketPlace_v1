@@ -11,8 +11,8 @@ public class AddressSuperClass {
     private String pincode;
     @Column(length = 100, nullable = false)
     private String city;
-    @Column(length = 100, nullable = false)
-    private String state;
+//    @Column(length = 100, nullable = false)
+//    private String state;
     @Column(nullable = false)
     private  double lat;
     @Column(nullable = false)
@@ -36,13 +36,13 @@ public class AddressSuperClass {
         this.city = city;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
+//    public String getState() {
+//        return state;
+//    }
+//
+//    public void setState(String state) {
+//        this.state = state;
+//    }
 
     public double getLat() {
         return lat;

@@ -22,28 +22,28 @@ public class Store {
     @Column(length = 100, nullable = false)
     private String name;
 
-
     @Embedded
     private AddressSuperClass address;
 
     @Temporal(value = TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm")
     @Column(name="start_time")
     private Date startTime;
 
     @Temporal(value = TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm")
     @Column(name="end_time")
     private Date endTime;
 
     @Column(name="no_of_person")
-    private int noOfPerson;
+    private int person;
 
     @Column(name="duration")
     private int duration;
 
     //in minutes
 
+    @JsonIgnore
     @OneToMany(mappedBy = "store")
     private List<Slots> slotsList;
 
@@ -93,12 +93,12 @@ public class Store {
         this.endTime = endTime;
     }
 
-    public int getNoOfPerson() {
-        return noOfPerson;
+    public int getperson() {
+        return person;
     }
 
-    public void setNoOfPerson(int noOfPerson) {
-        this.noOfPerson = noOfPerson;
+    public void setperson(int person) {
+        this.person = person;
     }
 
     public int getDuration() {

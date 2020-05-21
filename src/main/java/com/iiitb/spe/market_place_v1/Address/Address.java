@@ -15,6 +15,9 @@ public class Address extends AddressSuperClass{
     @Column(length = 100, nullable = false)
     private String houseno;
 
+    @Column(length=1,nullable = false)
+    private byte primary;
+
 
 
 
@@ -44,5 +47,11 @@ public class Address extends AddressSuperClass{
         this.aid = aid;
     }
 
+    public byte getPrimary() {
+        return primary;
+    }
 
+    public void setPrimary(byte primary) {
+        this.primary = primary;
+    }
 }
