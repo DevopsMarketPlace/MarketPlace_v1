@@ -2,6 +2,8 @@ package com.iiitb.spe.market_place_v1.Store;
 
 import com.iiitb.spe.market_place_v1.Address.Address;
 import com.iiitb.spe.market_place_v1.Address.AddressSuperClass;
+import com.iiitb.spe.market_place_v1.StoreManager.StoreManager;
+import com.iiitb.spe.market_place_v1.StoreManager.StoreManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +16,19 @@ public class StoreService {
     @Autowired
     private StoreRepository storeRepository;
 
+    @Autowired
+    private StoreManagerService storeManagerService;
 
-    public Store createNewStore(Store s)
+    public Store createNewStore(Store s,StoreManager manager)
     {
+        s.setStoreManager(manager);
         return storeRepository.save(s);
     }
 
-    public Store updateStore(Store upStore, Store existingStore)
+    public Store updateStore(Store upStore)
     {
-        existingStore.setName(upStore.getName());
-        existingStore.setAddress(upStore.getAddress());
-        return storeRepository.save(existingStore);
+
+        return storeRepository.save(upStore);
     }
 
     public void removeStore(Store existingStore)
@@ -58,5 +62,8 @@ public class StoreService {
         return storeRepository.findByAddress_Pincode(pincode);
     }
 
-
+    public StoreManager fetchManagerById(int id)
+    {
+        return storeManagerService.fetchById(id);
+    }
 }
