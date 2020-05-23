@@ -23,6 +23,9 @@ public class ProductStore{
     @Column(name="quantity",nullable = false)
     private int quantity;
 
+    @Column(name="disprice")
+    private double dispirce;
+
     public ProductStore() {
 
     }
@@ -57,6 +60,14 @@ public class ProductStore{
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public double getDispirce() {
+        return dispirce;
+    }
+
+    public void setDispirce(double dispirce) {
+        this.dispirce = dispirce;
     }
 }
 

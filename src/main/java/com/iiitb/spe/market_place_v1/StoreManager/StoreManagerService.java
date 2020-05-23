@@ -19,4 +19,12 @@ public class StoreManagerService {
     {
         return storeManagerRepository.save(storeManager);
     }
+    public StoreManager fetchById(int id)
+    {
+        return storeManagerRepository.findById(id).orElse(null);
+    }
+    public StoreManager getStores(int id)
+    {
+        return storeManagerRepository.findStoreList(id).orElse(null);
+    }
 }

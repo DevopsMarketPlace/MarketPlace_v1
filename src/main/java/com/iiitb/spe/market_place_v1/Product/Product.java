@@ -15,10 +15,10 @@ public class Product {
     private String productname;
     @Column(nullable = false)
     private double pprice;
-    @Column(length = 150)
-    private String description;
-    @Column(nullable = false)
-    private double disprice;
+//    @Column(length = 150)
+//    private String description;
+//    @Column(nullable = false)
+//    private double disprice;
     @JsonIgnore
     // To Fetch product by Kavish
     @OneToMany(mappedBy = "product")
@@ -74,19 +74,19 @@ public class Product {
         this.pprice = pprice;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getDisprice() {
-        return disprice;
-    }
-
-    public void setDisprice(double disprice) {
-        this.disprice = disprice;
-    }
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+//
+//    public double getDisprice() {
+//        return disprice;
+//    }
+//
+//    public void setDisprice(double disprice) {
+//        this.disprice = disprice;
+//    }
 }
