@@ -3,4 +3,4 @@ FROM tomcat
 
 MAINTAINER Chaitanya
 
-COPY target/MarketPlace_v1.war /usr/local/tomcat/webapps/
+COPY target/market_place_v1-0.0.1-SNAPSHOT.jar /usr/local/tomcat/webapps/
