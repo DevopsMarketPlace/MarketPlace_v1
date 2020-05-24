@@ -26,12 +26,12 @@ public class Store {
     private AddressSuperClass address;
 
     @Temporal(value = TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm:ss")
     @Column(name="start_time")
     private Date startTime;
 
     @Temporal(value = TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm:ss")
     @Column(name="end_time")
     private Date endTime;
 
@@ -58,6 +58,7 @@ public class Store {
 
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "manager_id")
     private StoreManager storeManager;
 

@@ -3,11 +3,11 @@ package com.iiitb.spe.market_place_v1.Store;
 import com.iiitb.spe.market_place_v1.Exceptions.NotFoundException;
 import com.iiitb.spe.market_place_v1.Order.Order;
 import com.iiitb.spe.market_place_v1.Product.Product;
+import com.iiitb.spe.market_place_v1.StoreManager.StoreManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -17,26 +17,39 @@ public class StoreController {
     private StoreService storeService;
 
 
-    @PostMapping("/store")// ok tested
-    public int createStore(@RequestBody Store store)
+    @PostMapping("/store/{mgr_id}")// ok tested
+    public int createStore(@RequestBody Store store,@PathVariable("mgr_id") int mid)
     {
-        Store newStore=storeService.createNewStore(store);
+
+        StoreManager existingManager=storeService.fetchManagerById(mid);
+        if(existingManager==null)
+        {
+            throw new NotFoundException("Store Manager not found");
+        }
+        Store newStore=storeService.createNewStore(store,existingManager);
+
         return newStore.getSid();
     }
 
-    @PutMapping("/store")//ok tested
-    public Store updateStore(@RequestBody Store store,@RequestParam("sid") int sid)
+    @PutMapping("/store/{mid}")//ok tested
+    public Store updateStore(@RequestBody Store store,@PathVariable("mid") int mid)
     {
-        Store getStore=storeService.fetchStoreById(sid);
-        if(getStore==null)
+        Store getStore=storeService.fetchStoreById(store.getSid());
+        StoreManager existingManager=storeService.fetchManagerById(mid);
+        if(getStore==null )
         {
             throw new NotFoundException("Requested Store not found");
         }
-     return  storeService.updateStore(store,getStore);
+        else if(existingManager==null)
+        {
+            throw new NotFoundException("Store manager not found");
+        }
+        store.setStoreManager(existingManager);
+     return  storeService.updateStore(store);
 
     }
-    @DeleteMapping("/store") //ok tested
-    public String deleteStore(@RequestParam("sid") int sid)
+    @DeleteMapping("/store/{sid}") //ok tested
+    public String deleteStore(@PathVariable("sid") int sid)
     {
         Store getStore=storeService.fetchStoreById(sid);
         if(getStore==null)
@@ -115,11 +128,11 @@ public class StoreController {
         return result.getProductStoreList().parallelStream().map(x->x.getProduct()).collect(Collectors.toList());
 
     }
-    @GetMapping("/test")// ok tested
-    public List<Store> test()
+    @PostMapping("/test/{mid}")// ok tested
+    public void test(@RequestBody Store store,@PathVariable("mid") int mid)
     {
-        System.out.println("hello");
-        return storeService.fetchAllStores();
+        System.out.println(mid);
+        //return storeService.fetchAllStores();
     }
 
 }
