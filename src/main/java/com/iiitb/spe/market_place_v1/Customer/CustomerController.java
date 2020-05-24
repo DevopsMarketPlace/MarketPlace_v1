@@ -2,6 +2,7 @@ package com.iiitb.spe.market_place_v1.Customer;
 
 import com.iiitb.spe.market_place_v1.Exceptions.NotFoundException;
 import com.iiitb.spe.market_place_v1.Order.Order;
+import com.iiitb.spe.market_place_v1.StoreManager.StoreManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,6 +72,22 @@ public class CustomerController {
        }
        return result.getOrderList();
    }
+
+
+    @GetMapping("/customer /login")
+    public int authenticate(@RequestParam("username") String username,@RequestParam("pass") String password)
+    {
+        Customer check =customerService.fetchbyUsername(username);
+        if(check==null)
+        {
+            throw new NotFoundException("username or password incorrect");
+        }
+
+        return check.getUid();
+    }
+
+
+
 
 
 
