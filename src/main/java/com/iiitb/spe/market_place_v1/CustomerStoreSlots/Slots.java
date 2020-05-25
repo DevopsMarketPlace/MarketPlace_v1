@@ -3,6 +3,7 @@ package com.iiitb.spe.market_place_v1.CustomerStoreSlots;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.iiitb.spe.market_place_v1.Customer.Customer;
+import com.iiitb.spe.market_place_v1.Order.Order;
 import com.iiitb.spe.market_place_v1.Store.Store;
 
 import javax.persistence.*;
@@ -16,9 +17,9 @@ public class Slots {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int sid;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "store_id")
@@ -45,13 +46,7 @@ public class Slots {
         this.sid = sid;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public Store getStore() {
         return store;

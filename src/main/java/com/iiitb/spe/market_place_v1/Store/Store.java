@@ -1,15 +1,14 @@
 package com.iiitb.spe.market_place_v1.Store;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.iiitb.spe.market_place_v1.Address.Address;
 import com.iiitb.spe.market_place_v1.Address.AddressSuperClass;
 import com.iiitb.spe.market_place_v1.CustomerStoreSlots.Slots;
 import com.iiitb.spe.market_place_v1.Order.Order;
-import com.iiitb.spe.market_place_v1.Product.Product;
 import com.iiitb.spe.market_place_v1.Product.ProductStore;
 import com.iiitb.spe.market_place_v1.StoreManager.StoreManager;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class Store {
     private String name;
 
     @Embedded
-    private AddressSuperClass address;
+    private AddressSuperClass address=new AddressSuperClass();
 
     @Temporal(value = TemporalType.TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm:ss")
@@ -48,8 +47,8 @@ public class Store {
     private List<Slots> slotsList;
 
     @JsonIgnore //for fetching stores due to lazy fetch--aayush
-    @OneToMany(mappedBy = "store")
-    private List<ProductStore> productStoreList;
+    @OneToMany(mappedBy = "store",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    private List<ProductStore> productStoreList=new ArrayList<ProductStore>();
 
 
     @JsonIgnore
