@@ -93,17 +93,7 @@ public class CustomerController {
         return check.getUid();
     }
 
-    @GetMapping("/customer /login")
-    public int authenticate(@RequestParam("username") String username,@RequestParam("pass") String password)
-    {
-        Customer check =customerService.fetchbyUsername(username);
-        if(check==null)
-        {
-            throw new NotFoundException("username or password incorrect");
-        }
-
-        return check.getUid();
-    }
+   
 
 
 
