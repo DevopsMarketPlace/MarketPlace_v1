@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 //import com.iiitb.spe.market_place_v1.Exceptions.NotFoundException;
+import com.iiitb.spe.market_place_v1.Exceptions.NotFoundException;
+import com.iiitb.spe.market_place_v1.WrapperClasses.CustomProductFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,5 +88,30 @@ public class ProductController {
 
 	    }
 
+	    //aayush--new api created
 
+		@PostMapping("/product/store/{sid}")
+		public void addProductsToStore(@PathVariable("sid") int sid, @RequestBody List<CustomProductFormat> products)
+		{
+			Store existingStore=productService.isStorePresent(sid);
+			if(existingStore==null)
+			{
+				throw new NotFoundException("Store not found");
+			}
+
+
+
+			productService.addProductstoStore(products,existingStore);
+		}
+
+		@PostMapping("/product/{sid}")
+		public void addNewProductstoStore(@PathVariable("sid") int sid,@RequestBody List<CustomProductFormat> products)
+		{
+			Store existingStore=productService.isStorePresent(sid);
+			if(existingStore==null)
+			{
+				throw new NotFoundException("Store not found");
+			}
+			productService.addNewProductstoStore(products,existingStore);
+		}
 	}

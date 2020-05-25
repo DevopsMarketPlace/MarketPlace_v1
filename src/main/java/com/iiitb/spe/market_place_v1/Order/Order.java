@@ -1,6 +1,7 @@
 package com.iiitb.spe.market_place_v1.Order;
 
 import com.iiitb.spe.market_place_v1.Customer.Customer;
+import com.iiitb.spe.market_place_v1.CustomerStoreSlots.Slots;
 import com.iiitb.spe.market_place_v1.Store.Store;
 
 import javax.persistence.*;
@@ -29,11 +30,25 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderProduct> orderProductList;
 
+    @OneToOne(mappedBy = "order")
+    private Slots slots;
+
     @ManyToOne
     @JoinColumn(name="store_id")
     private Store store;
 
+    @Column(name="order_type")
+    private String order_type;
+
     public Order() {
+    }
+
+    public Slots getSlots() {
+        return slots;
+    }
+
+    public void setSlots(Slots slots) {
+        this.slots = slots;
     }
 
     public int getOid() {
@@ -82,5 +97,13 @@ public class Order {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public String getOrder_type() {
+        return order_type;
+    }
+
+    public void setOrder_type(String order_type) {
+        this.order_type = order_type;
     }
 }

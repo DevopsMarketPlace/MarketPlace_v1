@@ -1,9 +1,8 @@
 package com.iiitb.spe.market_place_v1.Customer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.iiitb.spe.market_place_v1.Address.Address;
+import com.iiitb.spe.market_place_v1.Address.AddressSuperClass;
 import com.iiitb.spe.market_place_v1.CustomerStoreSlots.Slots;
-import com.iiitb.spe.market_place_v1.Order.OrderProduct;
 import com.iiitb.spe.market_place_v1.Order.Order;
 import com.iiitb.spe.market_place_v1.User.User;
 
@@ -12,30 +11,23 @@ import java.util.List;
 
 @Entity
 public class Customer extends User {
-    @JsonIgnore
-    @OneToMany
-    @JoinTable(name="customer_address")
-    private List<Address> addressList;
+
+    @Column(length = 100, nullable = false)
+    private String houseno;
+
+    @Embedded
+    private AddressSuperClass address;
 
     @JsonIgnore
     @OneToMany(mappedBy = "customer")
     private List<Order>orderList;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "customer")
-    private List<Slots> slotsList;
+
 
     public Customer() {
         super();
     }
 
-    public List<Address> getAddressList() {
-        return addressList;
-    }
-
-    public void setAddressList(List<Address> addressList) {
-        this.addressList = addressList;
-    }
 
     public List<Order> getOrderList() {
         return orderList;
@@ -43,5 +35,21 @@ public class Customer extends User {
 
     public void setOrderList(List<Order> orderList) {
         this.orderList = orderList;
+    }
+
+    public String getHouseno() {
+        return houseno;
+    }
+
+    public void setHouseno(String houseno) {
+        this.houseno = houseno;
+    }
+
+    public AddressSuperClass getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressSuperClass address) {
+        this.address = address;
     }
 }

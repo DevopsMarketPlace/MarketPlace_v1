@@ -3,21 +3,25 @@ package com.iiitb.spe.market_place_v1.Product;
 import com.iiitb.spe.market_place_v1.Store.Store;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class ProductStore{
+public class ProductStore implements Serializable {
 
-    @EmbeddedId
-    private ProductStoreId productStoreId;
+//    @EmbeddedId
+//    private ProductStoreId productStoreId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
     @JoinColumn(name="product_id")
-    @MapsId("productId")
     private Product product;
 
     @ManyToOne
     @JoinColumn(name="store_id")
-    @MapsId("storeId")
+
     private Store store;
 
     @Column(name="quantity",nullable = false)
@@ -30,20 +34,27 @@ public class ProductStore{
 
     }
 
+    public ProductStore(Product product, Store store, int quantity, double dispirce) {
+        this.product = product;
+        this.store = store;
+        this.quantity = quantity;
+        this.dispirce = dispirce;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getQuantity() {
         return quantity;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public ProductStoreId getProductStoreId() {
-        return productStoreId;
-    }
-
-    public void setProductStoreId(ProductStoreId productStoreId) {
-        this.productStoreId = productStoreId;
     }
 
     public Product getProduct() {

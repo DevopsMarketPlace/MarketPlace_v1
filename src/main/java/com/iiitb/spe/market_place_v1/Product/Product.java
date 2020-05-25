@@ -21,7 +21,7 @@ public class Product {
 //    private double disprice;
     @JsonIgnore
     // To Fetch product by Kavish
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductStore> productStoreList;
     @JsonIgnore
     // To Fetch product by Kavish
@@ -30,6 +30,12 @@ public class Product {
 
     public Product(){
 
+    }
+
+    public Product(int pid, String productname, double pprice) {
+        this.pid = pid;
+        this.productname = productname;
+        this.pprice = pprice;
     }
 
     public List<ProductStore> getProductStoreList() {

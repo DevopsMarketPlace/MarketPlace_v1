@@ -16,6 +16,8 @@ public class CentralExceptionHandler extends ResponseEntityExceptionHandler {
         CustomError err=new CustomError(HttpStatus.NOT_FOUND,e.getMessage());
         HttpHeaders h=new HttpHeaders();
         h.set("Error-status","NOT FOUND");
+        //
+        e.printStackTrace();
         return new ResponseEntity<CustomError>(err,h,HttpStatus.NOT_FOUND);
 
 
@@ -26,6 +28,7 @@ public class CentralExceptionHandler extends ResponseEntityExceptionHandler {
         CustomError err=new CustomError(HttpStatus.FOUND,e.getMessage());
         HttpHeaders h=new HttpHeaders();
         h.set("Error-status","AlREADY FOUND");
+        e.printStackTrace();
         return new ResponseEntity<CustomError>(err,h,HttpStatus.FOUND);
     }
 @ExceptionHandler(Exception.class)
@@ -34,6 +37,7 @@ public ResponseEntity<CustomError>generalException(Exception e)
     CustomError err=new CustomError(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage());
     HttpHeaders h=new HttpHeaders();
     h.set("Error-status","Internal Server error");
+    e.printStackTrace();
     return new ResponseEntity<CustomError>(err,h,HttpStatus.INTERNAL_SERVER_ERROR);
 }
 }

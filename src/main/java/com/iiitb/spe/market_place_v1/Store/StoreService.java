@@ -1,7 +1,5 @@
 package com.iiitb.spe.market_place_v1.Store;
 
-import com.iiitb.spe.market_place_v1.Address.Address;
-import com.iiitb.spe.market_place_v1.Address.AddressSuperClass;
 import com.iiitb.spe.market_place_v1.StoreManager.StoreManager;
 import com.iiitb.spe.market_place_v1.StoreManager.StoreManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StoreService {

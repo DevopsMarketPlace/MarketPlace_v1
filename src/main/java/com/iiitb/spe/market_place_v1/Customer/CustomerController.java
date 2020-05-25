@@ -1,5 +1,6 @@
 package com.iiitb.spe.market_place_v1.Customer;
 
+import com.iiitb.spe.market_place_v1.Exceptions.FoundException;
 import com.iiitb.spe.market_place_v1.Exceptions.NotFoundException;
 import com.iiitb.spe.market_place_v1.Order.Order;
 import com.iiitb.spe.market_place_v1.StoreManager.StoreManager;
@@ -9,20 +10,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class CustomerController {
    @Autowired
     private  CustomerService customerService;
 
    // Add a new customer to repository -- ok Tested
    @PostMapping("/customer")// ok tested
-    public String addCustomer(@RequestBody Customer customer){
+    public void  addCustomer(@RequestBody Customer customer) {
        //checking username avaliability
        Customer check = customerService.fetchbyUsername(customer.getUsername());
-       if(check== null) {
+       if (check == null) {
            Customer newCustomer = customerService.addCustomer(customer);
-            return "Successfully added";
+
+       } else {
+           throw new FoundException("Username already taken");
        }
-       return "Username already taken! try another one";
    }
    // Delete the record of the existing customer -- ok Tested
    @DeleteMapping("/customer")
@@ -72,7 +75,23 @@ public class CustomerController {
        }
        return result.getOrderList();
    }
+    @GetMapping("/customer/login")
+    public int authenticate(@RequestParam("username") String username,@RequestParam("password") String password)
+    {
+        Customer check =customerService.fetchbyUsername(username);
+        if(check==null)
+        {
+            throw new NotFoundException("username or password incorrect");
+        }
+        else if(!check.getPassword().equals(password))
+        {
+            System.out.println(check.getPassword()+" "+password);
+            throw new NotFoundException("password incorrect");
+        }
 
+
+        return check.getUid();
+    }
 
     @GetMapping("/customer /login")
     public int authenticate(@RequestParam("username") String username,@RequestParam("pass") String password)
