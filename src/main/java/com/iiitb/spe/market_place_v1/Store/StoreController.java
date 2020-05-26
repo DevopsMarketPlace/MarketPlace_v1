@@ -98,8 +98,8 @@ public class StoreController {
 
     }
 
-    @GetMapping("/store/bypincode")//ok tested
-    public List<Store> getStoreListbyPincode(@RequestParam("pincode") String pincode)
+    @GetMapping("/store/bypincode/{pincode}")//ok tested
+    public List<Store> getStoreListbyPincode(@PathVariable("pincode") String pincode)
     {
         List<Store> getStores=storeService.fetchStorebyPincode(pincode);
         if(getStores.size()==0)

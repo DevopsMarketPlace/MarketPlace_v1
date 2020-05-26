@@ -2,6 +2,7 @@ package com.iiitb.spe.market_place_v1.CustomerStoreSlots;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.spe.market_place_v1.Customer.Customer;
 import com.iiitb.spe.market_place_v1.Order.Order;
 import com.iiitb.spe.market_place_v1.Store.Store;
@@ -21,6 +22,7 @@ public class Slots {
     @JoinColumn(name = "order_id")
     private Order order;
 
+   @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "store_id")
     private Store store;

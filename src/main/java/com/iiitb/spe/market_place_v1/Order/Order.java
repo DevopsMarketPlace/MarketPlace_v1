@@ -1,5 +1,6 @@
 package com.iiitb.spe.market_place_v1.Order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.spe.market_place_v1.Customer.Customer;
 import com.iiitb.spe.market_place_v1.CustomerStoreSlots.Slots;
 import com.iiitb.spe.market_place_v1.Store.Store;
@@ -27,18 +28,21 @@ public class Order {
     @JoinColumn(name="customer_id")
     private Customer customer;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "order")
     private List<OrderProduct> orderProductList;
 
+
     @OneToOne(mappedBy = "order")
     private Slots slots;
+
 
     @ManyToOne
     @JoinColumn(name="store_id")
     private Store store;
 
     @Column(name="order_type")
-    private String order_type;
+    private String order_type;  //pickup delivery
 
     public Order() {
     }

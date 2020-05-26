@@ -1,5 +1,6 @@
 package com.iiitb.spe.market_place_v1.StoreManager;
 
+import com.iiitb.spe.market_place_v1.Store.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ public class StoreManagerService {
 
     @Autowired
     private StoreManagerRepository storeManagerRepository;
+
 
     public StoreManager fetchByUsername(String username)
     {
@@ -27,4 +29,5 @@ public class StoreManagerService {
     {
         return storeManagerRepository.findStoreList(id).orElse(null);
     }
+
 }

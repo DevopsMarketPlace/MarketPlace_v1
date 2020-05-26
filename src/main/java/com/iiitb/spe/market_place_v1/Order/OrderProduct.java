@@ -1,7 +1,5 @@
 package com.iiitb.spe.market_place_v1.Order;
 
-import com.iiitb.spe.market_place_v1.Customer.Customer;
-import com.iiitb.spe.market_place_v1.Order.OrderProductId;
 import com.iiitb.spe.market_place_v1.Product.Product;
 
 import javax.persistence.*;
@@ -10,16 +8,16 @@ import javax.persistence.*;
 @Table(name="Order_Product")
 public class OrderProduct {
 
-    @EmbeddedId
-    private OrderProductId orderProductId;
+      @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+      private int id;
+
 
     @ManyToOne
-    @MapsId("order_id")
     @JoinColumn(name="order_id")
     private Order order;
 
     @ManyToOne
-    @MapsId("product_id")
     @JoinColumn(name="product_id")
     private Product product;
 
@@ -37,12 +35,12 @@ public class OrderProduct {
         this.quantity = quantity;
     }
 
-    public OrderProductId getOrderProductId() {
-        return orderProductId;
+    public int getId() {
+        return id;
     }
 
-    public void setOrderProductId(OrderProductId orderProductId) {
-        this.orderProductId = orderProductId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Order getOrder() {

@@ -5,14 +5,14 @@ import org.springframework.http.HttpStatus;
 public class CustomError {
 
     private HttpStatus httpStatus;
-    private String massage;
+    private String message;
 
     public CustomError() {
     }
 
     public CustomError(HttpStatus httpStatus, String massage) {
         this.httpStatus = httpStatus;
-        this.massage = massage;
+        this.message = massage;
     }
 
     public HttpStatus getHttpStatus() {
@@ -24,10 +24,10 @@ public class CustomError {
     }
 
     public String getMassage() {
-        return massage;
+        return message;
     }
 
     public void setMassage(String massage) {
-        this.massage = massage;
+        this.message = massage;
     }
 }
