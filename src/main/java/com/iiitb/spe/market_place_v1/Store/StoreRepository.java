@@ -16,7 +16,7 @@ public interface StoreRepository extends CrudRepository<Store,Integer> {
     @Query("select s from Store s join fetch s.orderList where s.sid=:id")
     Store fetchOrders(@Param("id") int id);
 
-    @Query("select s from Store s inner join s.orderList o where o.order_type=:type ")
+    @Query("select s from Store s join fetch s.orderList o where o.order_type=:type ")
     Store fetchOrdersByType(@Param("type") String type);
 
     @Query("select s from Store s inner join s.productStoreList ps where ps.quantity <=:quantity  and s.sid=:sid")

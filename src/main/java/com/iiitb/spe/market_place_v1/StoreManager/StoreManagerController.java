@@ -135,6 +135,8 @@ public class StoreManagerController {
 //            return s.getOrderList().parallelStream().filter(y->y.getOrder_type().equals("Delivery")).collect(Collectors.toList()).size();
 //        }).collect(Collectors.toList());
 //        int a = countList.parallelStream().mapToInt(Integer::valueOf).sum();
+
+
         Store temp1 =storeService.fetchOrderListByType("delivery");
         if(temp1==null)
         {
