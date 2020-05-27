@@ -136,6 +136,13 @@ public class ProductController {
 			logger.info("Added New Product to Store sid="+sid);
 			productService.addNewProductstoStore(products,existingStore);
 		}
+	@PostMapping("/products")
+	public String createProducts(@RequestBody List<Product> product)
+	{
+		productService.createNewProducts(product);
+		//logger.info("New Product Created pid="+newProduct.getPid());
+		return "success";
+	}
 
 
 	}

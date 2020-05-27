@@ -108,4 +108,9 @@ public class ProductService {
 
 	}
 
+	public void createNewProducts(List<Product> productList)
+	{
+		productRepository.saveAll(productList);
+	}
+
 }
