@@ -52,7 +52,7 @@ public class CustomerUnitTest {
 
     @Test
     public void deleteCustomer() throws Exception {
-        mockMvc.perform( MockMvcRequestBuilders.delete("/customer/{id}", 1) )
+        mockMvc.perform( MockMvcRequestBuilders.delete("/customer/{uid}", 1) )
                 .andExpect(status().isOk());
     }
 

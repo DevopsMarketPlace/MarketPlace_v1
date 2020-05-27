@@ -42,8 +42,8 @@ public class StoreUnitTest {
     private StoreService storeService;
     Date start = new Date();
     Date end = new Date();
-    StoreManager sm = new StoreManager(101,"kris","chaitan","123","kris","pass");
-    Store store = new Store(1,"SuperMarket",start,end,5,10,sm);
+
+    Store store = new Store(1,"SuperMarket",start,end,5,10,new StoreManager());
     @Test
     public void createStore() throws Exception {
         when(storeService.createNewStore(Mockito.any(Store.class),Mockito.any(StoreManager.class))).thenReturn(store);

@@ -20,6 +20,7 @@ public class StoreManager extends User {
     public StoreManager() {
 
     }
+
     public StoreManager(List<Store> storeList) {
         this.storeList = storeList;
     }
