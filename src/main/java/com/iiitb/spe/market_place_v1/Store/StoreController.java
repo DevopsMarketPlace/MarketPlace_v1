@@ -5,6 +5,8 @@ import com.iiitb.spe.market_place_v1.Order.Order;
 import com.iiitb.spe.market_place_v1.Product.Product;
 import com.iiitb.spe.market_place_v1.StoreManager.StoreManager;
 
+import com.iiitb.spe.market_place_v1.WrapperClasses.CustomProductFormat;
+import com.iiitb.spe.market_place_v1.WrapperClasses.CustomStoreFormat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,6 +156,27 @@ public class StoreController {
         logger.info("Testing");
         System.out.println(mid);
         //return storeService.fetchAllStores();
+    }
+
+    @GetMapping("/store/product/{sid}")//ok tested
+    public List<CustomProductFormat> getProduct(@PathVariable("sid") int sid)
+    {
+        Store response = storeService.fetchStoreById(sid);
+        if (response == null) {
+            logger.warn("Provided store not found Sid="+sid);
+            throw new NotFoundException("Provided store not found");
+        }
+
+        Store result=storeService.fetchProductList(sid);
+        if(result==null)
+        {
+            logger.warn("No products found for Store=" + response.getName());
+            throw new NotFoundException("No products found for Store" + response.getName());
+        }
+        logger.info("Products of Store Fetched sid="+sid);
+        return result.getProductStoreList().parallelStream().map(x->{return new CustomProductFormat(x.getProduct().getPid(),x.getProduct().getProductname(),x.getProduct().getPprice(),x.getDispirce(),x.getQuantity());
+        }).collect(Collectors.toList());
+
     }
 
 }
