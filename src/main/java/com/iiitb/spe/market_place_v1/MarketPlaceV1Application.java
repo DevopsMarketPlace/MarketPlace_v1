@@ -2,6 +2,7 @@ package com.iiitb.spe.market_place_v1;
 
 import com.iiitb.spe.market_place_v1.Product.Product;
 import com.iiitb.spe.market_place_v1.Product.ProductRepo;
+import com.iiitb.spe.market_place_v1.Product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,10 +16,9 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Random;
 
 @SpringBootApplication
-public class MarketPlaceV1Application extends SpringBootServletInitializer implements CommandLineRunner {
+public class MarketPlaceV1Application extends SpringBootServletInitializer{
 
-    @Autowired
-    private ProductRepo productRepo;
+
     @Override
     protected SpringApplicationBuilder configure (SpringApplicationBuilder builder) {
         return builder.sources(MarketPlaceV1Application.class);
@@ -37,16 +37,16 @@ public class MarketPlaceV1Application extends SpringBootServletInitializer imple
         }
     }
 
-    @Override
-    public void run(String... arg0) throws Exception {
-
-        for(int i=0;i<30;i++)
-        {
-            Random r=new Random();
-            Product p=new Product();
-            p.setProductname("Product"+i);
-            p.setPprice(r.nextInt(100)+5);
-            productRepo.save(p);
-        }
-    }
+//    @Override
+//    public void run(String... arg0) throws Exception {
+//        ProductService productService = new ProductService();
+//        for(int i=0;i<30;i++)
+//        {
+//            Random r=new Random();
+//            Product p=new Product();
+//            p.setProductname("Product"+i);
+//            p.setPprice(r.nextInt(100)+5);
+//            productService.createNewProduct(p);
+//        }
+//    }
 }

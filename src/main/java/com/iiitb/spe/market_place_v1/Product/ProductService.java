@@ -38,7 +38,7 @@ public class ProductService {
 		return productRepository.save(product);
 	}
 	
-	public Product updateProduct(Product upProduct,Product existingproduct)
+	public Product updateProduct(Product upProduct)
 	{
 		return productRepository.save(upProduct);
 	}

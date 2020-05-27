@@ -55,18 +55,18 @@ public class ProductController {
 		return newProduct.getPid();
 	}
 	
-	@PutMapping("/product/{pid}")
-	public Product updateProduct(@PathVariable int pid,@RequestBody Product product)
+	@PutMapping("/product")
+	public Product updateProduct(@RequestBody Product product)
 	{
-		  Product getProduct=productService.fetchProductById(pid);
+		  Product getProduct=productService.fetchProductById(product.getPid());
 		  if(getProduct==null)
 	      {
 
-				logger.warn("Product Not Found Pid="+pid);
+				logger.warn("Product Not Found Pid="+product.getPid());
 	            throw new NotFoundException("Requested product not found");
 	      }
-		  logger.info("Product Updated pid="+pid);
-		return productService.updateProduct(product,getProduct);
+		  logger.info("Product Updated pid="+product.getPid());
+		return productService.updateProduct(product);
 	}
 	
 	@DeleteMapping("/product/{pid}")

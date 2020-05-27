@@ -64,17 +64,17 @@ public class ProductUnitTest {
     @Test
     public void updateProduct() throws Exception {
         mockMvc.perform( MockMvcRequestBuilders
-                .put("/product/{pid}",2)
+                .put("/product")
                 .content(asJsonString(product))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isNotFound());
 
     }
 
     @Test
     public void deleteProduct() throws Exception {
         mockMvc.perform( MockMvcRequestBuilders.delete("/product/{pid}", 2) )
-                .andExpect(status().isOk());
+                .andExpect(status().isNotFound());
     }
 }
