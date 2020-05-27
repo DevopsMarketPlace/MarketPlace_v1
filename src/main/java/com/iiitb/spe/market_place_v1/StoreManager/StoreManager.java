@@ -20,6 +20,10 @@ public class StoreManager extends User {
     public StoreManager() {
 
     }
+    public StoreManager(List<Store> storeList) {
+        this.storeList = storeList;
+    }
+
     public StoreManager(int id)
     {
         super.setUid(id);
