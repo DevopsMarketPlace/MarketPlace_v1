@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 //import com.iiitb.spe.market_place_v1.Exceptions.NotFoundException;
 import com.iiitb.spe.market_place_v1.Exceptions.NotFoundException;
 import com.iiitb.spe.market_place_v1.WrapperClasses.CustomProductFormat;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,12 +22,15 @@ import com.iiitb.spe.market_place_v1.Store.Store;
 @CrossOrigin("*")
 public class ProductController {
 	
+	Logger logger = LogManager.getLogger(ProductController.class);
+	
 	@Autowired
 	ProductService productService;
 	
 	@GetMapping("/products")
 	public List<Product> getAllProducts()
 	{
+		logger.info("All Products Fetched");
 		return productService.fetchAllProducts();
 	}
 	
@@ -35,8 +40,10 @@ public class ProductController {
 		Product getProduct = productService.fetchProductById(pid);
 		if(getProduct==null)
 		{
-//			 throw new NotFoundException("Provided product not found");
+			logger.warn("Product Not Found Pid="+pid);
+			 throw new NotFoundException("Provided product not found");
 		}
+		logger.info("Product Fetched pid="+pid);
 		return getProduct;
 	}
 	
@@ -44,6 +51,7 @@ public class ProductController {
 	public int createProduct(@RequestBody Product product)
 	{
 		Product newProduct=productService.createNewProduct(product);
+		logger.info("New Product Created pid="+newProduct.getPid());
 		return newProduct.getPid();
 	}
 	
@@ -53,8 +61,11 @@ public class ProductController {
 		  Product getProduct=productService.fetchProductById(pid);
 		  if(getProduct==null)
 	      {
-//	            throw new NotFoundException("Requested product not found");
+
+				logger.warn("Product Not Found Pid="+pid);
+	            throw new NotFoundException("Requested product not found");
 	      }
+		  logger.info("Product Updated pid="+pid);
 		return productService.updateProduct(product,getProduct);
 	}
 	
@@ -64,9 +75,12 @@ public class ProductController {
 		 Product getProduct=productService.fetchProductById(pid);
 	        if(getProduct==null)
 	        {
-//	            throw new NotFoundException("Provided product not found");
+
+				logger.warn("Product Not Found Pid="+pid);
+	            throw new NotFoundException("Provided product not found");
 	        }
 	        productService.removeProduct(getProduct);
+	        logger.info("Product Deleted");
 	        return "Successfully deleted";
 	}
 	
@@ -75,15 +89,18 @@ public class ProductController {
 	{
 		 Product response = productService.fetchProductById(pid);
 	        if (response == null) {
-//	            throw new NotFoundException("Provided Product not found");
+
+				logger.warn("Product Not Found Pid="+pid);
+	            throw new NotFoundException("Provided Product not found");
 	        }
 
 	        Product result=productService.fetchStoreList(pid);
 	        if(result==null)
 	        {
-//	            throw new NotFoundException("No products found for product" + response.getName());
+	        	logger.warn("Store Not Found");
+	            throw new NotFoundException("No products found for product" + response.getProductname());
 	        }
-
+	        logger.info("Store List Corresponding to Product fetched");
 	        return result.getProductStoreList().parallelStream().map(x->x.getStore()).collect(Collectors.toList());
 
 	    }
@@ -96,11 +113,13 @@ public class ProductController {
 			Store existingStore=productService.isStorePresent(sid);
 			if(existingStore==null)
 			{
+
+				logger.warn("Store Not Found Pid="+sid);
 				throw new NotFoundException("Store not found");
 			}
 
 
-
+			logger.info("Product Added to store Sid="+sid);
 			productService.addProductstoStore(products,existingStore);
 		}
 
@@ -110,8 +129,11 @@ public class ProductController {
 			Store existingStore=productService.isStorePresent(sid);
 			if(existingStore==null)
 			{
+
+				logger.warn("Store Not Found Pid="+sid);
 				throw new NotFoundException("Store not found");
 			}
+			logger.info("Added New Product to Store sid="+sid);
 			productService.addNewProductstoStore(products,existingStore);
 		}
 

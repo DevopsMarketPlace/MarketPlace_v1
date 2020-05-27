@@ -26,6 +26,15 @@ public class User {
     public User() {
     }
 
+    public User(int uid, String firstname, String lastname, String contactno, String username, String password) {
+        this.uid = uid;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.contactno = contactno;
+        this.username = username;
+        this.password = password;
+    }
+
     public int getUid() {
         return uid;
     }

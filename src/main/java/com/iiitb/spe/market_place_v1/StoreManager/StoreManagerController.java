@@ -7,6 +7,9 @@ import com.iiitb.spe.market_place_v1.Product.ProductStore;
 import com.iiitb.spe.market_place_v1.Store.Store;
 import com.iiitb.spe.market_place_v1.Store.StoreService;
 import com.iiitb.spe.market_place_v1.WrapperClasses.CustomStoreFormat;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +21,8 @@ import java.util.stream.Collectors;
 @RestController
 @CrossOrigin("*")
 public class StoreManagerController {
+	
+	Logger logger = LogManager.getLogger(StoreManagerController.class);
 
     @Autowired
     private StoreManagerService storeManagerService;
@@ -31,13 +36,15 @@ public class StoreManagerController {
         StoreManager existingManager=storeManagerService.fetchByUsername(username);
         if(existingManager==null)
         {
+        	logger.warn("username or password incorrect");
             throw new NotFoundException("username or password incorrect");
         }
         if(!password.equals(existingManager.getPassword()))
         {
+        	logger.warn("password incorrect");
             throw new NotFoundException("password incorrect");
         }
-
+        logger.info("Authentication Successfull");
         return existingManager;
     }
     @PostMapping("/storemanager")
@@ -46,8 +53,10 @@ public class StoreManagerController {
         StoreManager existingManager=storeManagerService.fetchByUsername(storeManager.getUsername());
         if(existingManager!=null)
         {
+        	logger.warn("username already taken!! try different");
             throw new FoundException("username already taken!! try different");
         }
+        logger.info("Store Manager Created "+storeManager.getFirstname());
         storeManagerService.createStoreManager(storeManager);
 
     }
@@ -58,13 +67,16 @@ public class StoreManagerController {
         StoreManager existingManager=storeManagerService.fetchById(mgr_id);
         if(existingManager==null)
         {
+        	logger.warn("Store Manager not found Mgr_id="+mgr_id);
             throw new NotFoundException("Store Manager not found");
         }
         StoreManager temp=storeManagerService.getStores(existingManager.getUid());
         if(temp==null)
         {
+        	logger.warn("No Stores Found");
             throw new FoundException("No Stores found");
         }
+        logger.info("Fetched All Stores");
         return temp.getStoreList();
 
     }
@@ -74,6 +86,7 @@ public class StoreManagerController {
         StoreManager existingManager=storeManagerService.fetchById(mgr_id);
         if(existingManager==null)
         {
+        	logger.warn("Store Manager not found");
             throw new NotFoundException("Store Manager not found");
         }
         StoreManager temp=storeManagerService.getStores(existingManager.getUid());
@@ -81,6 +94,7 @@ public class StoreManagerController {
         {
             return 0;
         }
+        logger.info("Count of Stores Fetched");
         return temp.getStoreList().size();
     }
 
@@ -90,11 +104,13 @@ public class StoreManagerController {
         StoreManager existingManager=storeManagerService.fetchById(mgr_id);
         if(existingManager==null)
         {
+        	logger.warn("Store Manager Not Found Mgr_id="+mgr_id);
             throw new NotFoundException("Store Manager not found");
         }
         StoreManager temp=storeManagerService.getStores(existingManager.getUid());
         if(temp==null)
         {
+        	logger.warn("Store Not Found");
             return 0;
         }
 
@@ -107,6 +123,7 @@ public class StoreManagerController {
              return s.getOrderList().size();
 
          }).collect(Collectors.toList());
+       logger.info("Total Order Count Fetched");
        return  countList.parallelStream().mapToInt(Integer::valueOf).sum();
     }
 
@@ -117,6 +134,7 @@ public class StoreManagerController {
         List<Integer> result=new ArrayList<Integer>();
         if(existingManager==null)
         {
+        	logger.warn("Store Manager Not Found Mgr_id="+mgr_id);
             throw new NotFoundException("Store Manager not found");
         }
         StoreManager temp=storeManagerService.getStores(existingManager.getUid());
@@ -157,7 +175,7 @@ public class StoreManagerController {
             int b = temp1.getOrderList().size();
             result.add(b);
         }
-
+        logger.info("Total Order by Type Fetched");
         return result ;
     }
     @GetMapping("/storemanager/stores/inventory/{mgr_id}")
@@ -166,6 +184,7 @@ public class StoreManagerController {
         StoreManager existingManager=storeManagerService.fetchById(mgr_id);
         if(existingManager==null)
         {
+        	logger.warn("");
             throw new NotFoundException("Store Manager not found");
         }
         StoreManager temp=storeManagerService.getStores(existingManager.getUid());
@@ -194,7 +213,7 @@ public class StoreManagerController {
 
         }
 
-
+        logger.info("Inventory Alert Fetched");
         return  response;
     }
 
@@ -205,11 +224,13 @@ public class StoreManagerController {
         List<Order> response=new ArrayList<Order>();
         if(existingManager==null)
         {
+        	logger.warn("Store Manager Not Found Mgr_id="+mgr_id);
             throw new NotFoundException("Store Manager not found");
         }
         StoreManager temp=storeManagerService.getStores(existingManager.getUid());
         if(temp==null)
         {
+        	logger.warn("Store Not Found Sid="+sid);
             throw new NotFoundException("Store not found");
         }
         System.out.println(temp.getStoreList().size());
@@ -218,6 +239,7 @@ public class StoreManagerController {
                         return x.getSid()==sid;}).collect(Collectors.toList());
         if(stores.size()==0)
         {
+        	logger.warn("Store Not Found");
             throw new NotFoundException("Store not found");
         }
         Store s=storeService.fetchOrderList(stores.get(0).getSid());
@@ -229,6 +251,7 @@ public class StoreManagerController {
         List<Order>orders =s.getOrderList().parallelStream().filter(x->x.getOrder_type().equals(type)).collect(Collectors.toList());
 
         response.addAll(orders);
+        logger.info("Order by Type Fetched Type="+type);
         return response;
 
     }
