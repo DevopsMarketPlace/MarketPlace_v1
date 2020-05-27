@@ -29,6 +29,10 @@ public class Customer extends User {
     }
 
 
+    public Customer(int uid, String firstname, String lastname, String contactno, String username, String password) {
+        super(uid, firstname, lastname, contactno, username, password);
+    }
+
     public List<Order> getOrderList() {
         return orderList;
     }

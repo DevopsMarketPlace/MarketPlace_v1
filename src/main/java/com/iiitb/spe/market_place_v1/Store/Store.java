@@ -61,6 +61,16 @@ public class Store {
     @JoinColumn(name = "manager_id")
     private StoreManager storeManager;
 
+    public Store(int sid, String name, Date startTime, Date endTime, int person, int duration, StoreManager storeManager) {
+        this.sid = sid;
+        this.name = name;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.person = person;
+        this.duration = duration;
+        this.storeManager = storeManager;
+    }
+
     public List<Slots> getSlotsList() {
         return slotsList;
     }

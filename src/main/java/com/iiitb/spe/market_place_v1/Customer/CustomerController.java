@@ -7,6 +7,7 @@ import com.iiitb.spe.market_place_v1.StoreManager.StoreManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -28,8 +29,8 @@ public class CustomerController {
        }
    }
    // Delete the record of the existing customer -- ok Tested
-   @DeleteMapping("/customer")
-    public String deleteCustomer(@RequestParam("uid") int uid){
+   @DeleteMapping("/customer/{uid}")
+    public String deleteCustomer(@PathVariable("uid") int uid){
        Customer getCustomer = customerService.fetchCustomer(uid);
 
        if(getCustomer== null){
