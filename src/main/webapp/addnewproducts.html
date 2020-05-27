@@ -19,11 +19,8 @@
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 
-  
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="js/addproducts.js"></script>
+ <script src="js/addnewproducts.js"></script>
  <script src="js/dashboard.js"></script>
 
  <style>
@@ -36,10 +33,66 @@
     outline:none;
     color: white;
 }
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 </style>
-<!-- Custom styles for this page -->
-
 </head>
 
 <body id="page-top">
@@ -155,7 +208,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Add Products to stores</h1>
+          <h1 class="h3 mb-4 text-gray-800">Add New Products to stores</h1>
           <br>
           <label>Select a particular store: </label>
           <select id="storelist">
@@ -164,31 +217,27 @@
           <hr/>
           <form id='form'  >
           <div class="card-body">
-            <div class="table-responsive" style='overflow-y: scroll; height: 300px;'>
+            <div class="table-responsive">
               <table class="table table-bordered" id="producttable" width="100%" cellspacing="0">
                <thead>
-                <th></th><th>Product id</th> <th>Product Name</th><th>Product Price</th><th>Discounted Price</th><th>Quantity</th>
+                <th>Product Name</th><th>Product Price</th><th>Discounted Price</th><th>Quantity</th>
                </thead>
-             
-                <tbody id="tablebody" >
+                <tbody id="tablebody">
 
                     
                 </tbody>
-                
-                
-               
+
+
                 </table>
-                
-                </div>
+                <hr>
                 <table class="table table-bordered" id="producttable" width="100%" cellspacing="0">
-                  <tbody >
-                   <tr ><td colspan='6'><input type='button' class='btn btn-primary btn-user btn-block' id='addproduct' value='Add Products'/></td></tr>
-                        
-                    </tbody>
+                    <tr><td><input type='button' id="addrow" value='Add More Product' class="btn btn-primary btn-user btn-block" /></td>
                     
-                    
-                   
+                    <td><input type='button' id="delrow" value='Delete Row' class="btn btn-primary btn-user btn-block" /></td>
+                    <td><input type='button' id='addproduct' value='Add Products to Store' class="btn btn-primary btn-user btn-block" style='background-color:#145A32'/></td>
+                    </tr>
                     </table>
+                </div>
                 </div>
                 </form>
 
@@ -245,15 +294,7 @@
     </div>
   </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+ 
 
 </body>
 

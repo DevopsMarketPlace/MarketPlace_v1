@@ -51,7 +51,7 @@ $(document).ready(function(){
 
         var store=$("#storelist").val();
         var deltype=$("#deltype").val();
-        
+
 
         $.get( "http://localhost:8085/storemanager/"+storeManager+"/store/"+store+"/orders/"+deltype)
         .done(function(data,status,xhr)
@@ -109,7 +109,7 @@ $(document).ready(function(){
         if(event.target.name=="customer")
         {
             var index=customer_details[event.target.id];
-            $("#result").append("Cusomer Details <br> Name:<b> "+index.customer.firstname+" "+index.customer.lastname
+            $("#result").html("Cusomer Details <br> Name:<b> "+index.customer.firstname+" "+index.customer.lastname
             +"</b><br>" 
             +"Contact no:-<b> "+index.customer.contactno+"</b><br>"+
             "Address :- <br>"+
@@ -120,7 +120,7 @@ $(document).ready(function(){
         }
         else
         {
-            alert(event.target.id);
+
 
             $.get( "http://localhost:8085/order/products/"+event.target.id)
         .done(function(data,status,xhr)
@@ -129,7 +129,7 @@ $(document).ready(function(){
             if(xhr.status&&xhr.status==200)
             {
               
-                $("#result").append("<table><thead><th>Product Name</th><th>Quantity</th></thead>");
+                $("#result").html("<table><thead><th>Product Name</th><th>Quantity</th></thead>");
 
                 data.map((x,index)=>{$("#result").append("<tbody><tr><td>"+x.pname+"</td><td>"+x.quantity+"</td></tbody></table>")});
             }    
@@ -139,7 +139,7 @@ $(document).ready(function(){
             
             if(xhr.status&&xhr.status==404)
             {
-            alert("Wrong Manager id!!!");
+            alert("No Products Found!!!");
             }
             else if(xhr.status&&xhr.status==500)
             {
