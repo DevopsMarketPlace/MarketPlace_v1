@@ -52,9 +52,13 @@ else if(e.target.name=="updatestore")
     var person=$("#person").val();
     var city=$("#city").val();
     var pincode=$("#pincode").val();
-    // alert(startTime+" "+endTime);
+
    if(Date.parse('01/01/2020 '+startTime)>=Date.parse('01/01/2020 '+endTime)){
        alert("Opening time should be smaller than closing time")
+   }
+   else if(pincode.length!=6)
+   {
+       alert("pincode should be exactly 6 digits");
    }
    else
    {
@@ -73,6 +77,7 @@ else if(e.target.name=="updatestore")
 	}
 	
 }
+
           
     $.ajaxSetup({
        headers: {

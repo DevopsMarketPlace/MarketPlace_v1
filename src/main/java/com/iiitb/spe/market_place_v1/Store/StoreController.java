@@ -37,6 +37,8 @@ public class StoreController {
             throw new NotFoundException("Store Manager not found");
         }
         Store newStore=storeService.createNewStore(store,existingManager);
+        System.out.println(store.getEndTime());
+        System.out.println(newStore.getEndTime());
         logger.info("Store Created "+newStore.getSid());
         return newStore.getSid();
     }

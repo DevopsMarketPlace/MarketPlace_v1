@@ -141,6 +141,7 @@ public class StoreManagerController {
         if(temp==null)
         {
             result.add(0);
+            result.add(0);
             return result;
         }
         int a=0;

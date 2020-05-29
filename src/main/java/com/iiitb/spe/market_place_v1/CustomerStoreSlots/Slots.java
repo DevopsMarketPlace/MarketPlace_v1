@@ -24,17 +24,17 @@ public class Slots {
     private Order order;
 
    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "store_id")
     private Store store;
 
     @Temporal(value = TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "HH:mm")
     @Column(name="start_time")
     private Date startTime;
 
     @Temporal(value = TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "HH:mm")
     @Column(name="end_time")
     private Date endTime;
 

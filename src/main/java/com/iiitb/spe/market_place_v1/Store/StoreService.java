@@ -4,6 +4,7 @@ import com.iiitb.spe.market_place_v1.StoreManager.StoreManager;
 import com.iiitb.spe.market_place_v1.StoreManager.StoreManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +28,11 @@ public class StoreService {
 
         return storeRepository.save(upStore);
     }
-
+    @Transactional
     public void removeStore(Store existingStore)
     {
-        storeRepository.delete(existingStore);
+
+        storeRepository.deleteById(existingStore.getSid());
     }
     public List<Store> fetchAllStores()
     {

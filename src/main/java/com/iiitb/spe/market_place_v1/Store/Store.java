@@ -25,12 +25,12 @@ public class Store {
     private AddressSuperClass address=new AddressSuperClass();
 
     @Temporal(value = TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "HH:mm:ss")
     @Column(name="start_time")
     private Date startTime;
 
     @Temporal(value = TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "HH:mm:ss")
     @Column(name="end_time")
     private Date endTime;
 
@@ -43,17 +43,17 @@ public class Store {
     //in minutes
 
     @JsonIgnore
-    @OneToMany(mappedBy = "store",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Slots> slotsList;
+    @OneToMany(mappedBy = "store",cascade = CascadeType.ALL)
+    private List<Slots> slotsList=new ArrayList<Slots>();
 
     @JsonIgnore //for fetching stores due to lazy fetch--aayush
-    @OneToMany(mappedBy = "store",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "store",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<ProductStore> productStoreList=new ArrayList<ProductStore>();
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "store")
-    private List<Order> orderList;
+    @OneToMany(mappedBy = "store",cascade = CascadeType.ALL)
+    private List<Order> orderList=new ArrayList<Order>();
 
 
     @ManyToOne
