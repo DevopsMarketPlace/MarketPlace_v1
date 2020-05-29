@@ -26,7 +26,7 @@ $(document).ready(function(){
     var storeManager=qsParm['uid'];
     var storeList=[];
 
-    $.get( "http://localhost:8085/storemanager/stores/"+storeManager)
+    $.get( "/storemanager/stores/"+storeManager)
         .done(function(data,status,xhr)
         {
         
@@ -53,7 +53,7 @@ $(document).ready(function(){
 
         var productList=[];
 
-        $.get( "http://localhost:8085/products")
+        $.get( "/products")
         .done(function(data,status,xhr)
         {
         
@@ -64,8 +64,8 @@ $(document).ready(function(){
             data.map((x,index)=>{$("#tablebody").append("<tr>"+
             
             "<td><label class='switch'><input name='check' type='checkbox' checked><span class='slider round'></span></label></td>"+"<td>"+x.pid+"</td>"+
-            "<td>"+x.productname+"</td>"+"<td>"+x.pprice+"</td>"+"<td><input type='number' step='0.01' required value="+x.pprice+" /></td>"+
-            "<td><input type='number' step='1' min='0' value='0' /></td>"+ 
+            "<td>"+x.productname+"</td>"+"<td>"+x.pprice+"</td>"+"<td><input class='form-control' type='number' step='0.01' required value="+x.pprice+" /></td>"+
+            "<td><input class='form-control' type='number' step='1' min='0' value='0' /></td>"+
             "</tr>")});
 
             } 
@@ -103,8 +103,10 @@ $(document).ready(function(){
             var tds = $(this).find('td');
             // alert(tds.eq(0));
             // alert(tds.eq(1).text());
-             var flag=tds.eq(0).find("input").is(':checked');   
-            if(flag)
+             var flag=tds.eq(0).find("input").is(':checked');
+             var quant=tds.eq(5).find("input").val();
+
+            if(flag && quant !=0)
             {
                 var temp={
 
@@ -130,7 +132,7 @@ $(document).ready(function(){
              } });
         
         
-        $.post( "http://localhost:8085/product/store/"+store_selection,JSON.stringify(data) )
+        $.post( "/product/store/"+store_selection,JSON.stringify(data) )
         .done(function(data,status,xhr){
         
          if(xhr.status&&xhr.status==200)

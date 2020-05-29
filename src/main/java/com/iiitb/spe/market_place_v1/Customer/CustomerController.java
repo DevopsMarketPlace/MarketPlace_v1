@@ -113,6 +113,21 @@ public class CustomerController {
         return check.getUid();
     }
 
+    @GetMapping("customer/{uid}/order/{oid}")
+    public Order getOrdersofCustomer(@PathVariable("uid") int uid,@PathVariable("oid") int oid){
+        Customer getCustomer = customerService.fetchCustomer(uid);
+        if(getCustomer == null){
+           // logger.warn("Provided customer id doesn't exist");
+            throw  new NotFoundException("Provided customer id doesn't exist");
+        }
+        Order response= customerService.fetchOrderById(oid);
+        if(response == null){
+           // logger.warn("No orders found for username " + getCustomer.getUsername());
+            throw new NotFoundException("No orders found!!!");
+        }
+       // logger.info("Orders of Customer Fetched Uid="+uid);
+        return response;
+    }
    
 
 

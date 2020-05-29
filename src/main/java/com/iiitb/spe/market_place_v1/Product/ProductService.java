@@ -105,7 +105,6 @@ public class ProductService {
 
 		storeService.updateStore(store);
 
-
 	}
 
 	public void createNewProducts(List<Product> productList)

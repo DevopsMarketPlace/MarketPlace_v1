@@ -143,39 +143,29 @@ public class StoreManagerController {
             result.add(0);
             return result;
         }
+        int a=0;
+        int b=0;
+    for (Store s: temp.getStoreList()) {
+        Store temp1 = storeService.fetchOrderListByType("delivery", s.getSid());
+        if (temp1 == null) {
+            a += 0;
+        } else {
+            a += temp1.getOrderList().size();
 
-
-//        List<Integer> countList= temp.getStoreList().parallelStream().map(x->{
-//
-//            Store s=storeService.fetchOrderList(x.getSid());
-//            if(s==null)
-//                return 0;
-//            return s.getOrderList().parallelStream().filter(y->y.getOrder_type().equals("Delivery")).collect(Collectors.toList()).size();
-//        }).collect(Collectors.toList());
-//        int a = countList.parallelStream().mapToInt(Integer::valueOf).sum();
-
-
-        Store temp1 =storeService.fetchOrderListByType("delivery");
-        if(temp1==null)
-        {
-            result.add(0);
-        }
-        else{
-            int a=temp1.getOrderList().size();
-            result.add(a);
         }
 
 
-        temp1=storeService.fetchOrderListByType("pickup");
-        if(temp1==null)
-        {
-            result.add(0);
+        temp1 = storeService.fetchOrderListByType("pickup", s.getSid());
+        if (temp1 == null) {
+            b += 0;
+        } else {
+            b += temp1.getOrderList().size();
+
         }
-        else {
-            int b = temp1.getOrderList().size();
-            result.add(b);
-        }
+    }
         logger.info("Total Order by Type Fetched");
+        result.add(a);
+        result.add(b);
         return result ;
     }
     @GetMapping("/storemanager/stores/inventory/{mgr_id}")

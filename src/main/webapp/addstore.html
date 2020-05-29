@@ -150,40 +150,41 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Add New Store</h1>
           <br>
+            <div class="row">
+            <div class="col-lg-1"></div>
+                <div class="col-lg-10">
           <form id='form' >
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
                 <tr>
                     <td>Store Name:</td>
-                    <td><input type='text' name='name' id='name'required placeholder="Enter Store name"/></td>
+                    <td><input class='form-control' type='text' name='name' id='name'required placeholder="Enter Store name"/></td>
                 </tr>
                 <tr>
                     <td>Store Opening Time:</td>
-                    <td><input type='time' name='startTime' id='startTime' required /></td>
+                    <td><input class='form-control' type='time' name='startTime' id='startTime' required /></td>
                 </tr>
                 <tr>
                     <td>Store Closing Time:</td>
-                    <td><input type='time' name='endTime' id='endTime' required /></td>
+                    <td><input class='form-control' type='time' name='endTime' id='endTime' required /></td>
                 </tr>
                 <tr>
                     <td>Duration(Per slot in minutes):</td>
-                    <td><input type='number' name='duration' id='duration'required min="10" placeholder="Enter duration in minutes"/></td>
+                    <td><input class='form-control' type='number' name='duration' id='duration'required min="10" placeholder="Enter duration in minutes"/></td>
                 </tr>
                 <tr>
                     <td>Person per slot:</td>
-                    <td><input type='number' name='persons' id='person' step='1' min="1"  required placeholder='Enter person count'/></td>
+                    <td><input class='form-control' class='form-control' type='number' name='persons' id='person' step='1' min="1"  value="1" disabled required placeholder='Enter person count'/></td>
                 </tr>
-                <tr >
-                    <td >Address:</td><td></td>
-                 </tr>
+
                  <tr>
                     <td>City:</td>
-                    <td><input type='text' name='city' id='city' required placeholder="Enter city name" /></td>
+                    <td><input class='form-control' type='text' name='city' id='city' required placeholder="Enter city name" /></td>
                 </tr>
                 <tr>
                     <td>Pincode:</td>
-                    <td><input type='text' name='pincode' id='pincode' required  placeholder="Enter your location pincode" /></td>
+                    <td><input class='form-control' type='text' name='pincode' id='pincode' required  placeholder="Enter your location pincode" /></td>
                 </tr>
                 <!-- <tr>
                     <td><label>latitude:</label>
@@ -201,6 +202,9 @@
                 </div>
                 </div>
                 </form>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
 
 
 

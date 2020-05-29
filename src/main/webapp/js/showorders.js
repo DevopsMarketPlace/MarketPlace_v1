@@ -19,7 +19,7 @@ $(document).ready(function(){
     var storeManager=qsParm['uid'];
     var storeList=[];
 
-    $.get( "http://localhost:8085/storemanager/stores/"+storeManager)
+    $.get( "/storemanager/stores/"+storeManager)
         .done(function(data,status,xhr)
         {
         
@@ -46,70 +46,75 @@ $(document).ready(function(){
 
         var customer_details=[];
 
-    $("#orders").click(function(){
+    $("#orders").click(function() {
 
 
-        var store=$("#storelist").val();
-        var deltype=$("#deltype").val();
+        var store = $("#storelist").val();
+        var deltype = $("#deltype").val();
+        if (store == -1) {
+            alert("Please select appropriate store!!");
+        }
+        else {
 
 
-        $.get( "http://localhost:8085/storemanager/"+storeManager+"/store/"+store+"/orders/"+deltype)
-        .done(function(data,status,xhr)
-        {
-        
-            if(xhr.status&&xhr.status==200)
-            {
-              
-                if(deltype=="delivery")
-                {
-                    $("#showorders").html("<thead><th>Order Date</th><th>Customer Details</th><th>Product Details</th><th>Store Name</th>");
-               
-                    customer_details=data;
-                    data.map((x,index)=>{$("#showorders").append("<tr><td>"+x.dateOfOrder+"</td>"+
-                    
-                           "<td> <input type='button' class='mylink' name='customer' id='"+index + "' value='Get Customer Details'></input></td>"+
-                           "<td><input type='button'  class='mylink' name='product' id='"+x.oid+"' value='Get product List'></input></td>"+
-                           "<td>"+x.store.name+"</td>")});
+
+
+        $.get("/storemanager/" + storeManager + "/store/" + store + "/orders/" + deltype)
+            .done(function (data, status, xhr) {
+
+                if (xhr.status && xhr.status == 200) {
+
+                    if (deltype == "delivery") {
+                        $("#showorders").html("<thead><th>Order Date</th><th>Customer Details</th><th>Product Details</th><th>Store Name</th>");
+
+                        customer_details = data;
+                        data.map((x, index) => {
+                            $("#showorders").append("<tr><td>" + x.dateOfOrder + "</td>" +
+
+                                "<td> <input type='button' class='mylink' name='customer' id='" + index + "' value='Get Customer Details'></input></td>" +
+                                "<td><input type='button'  class='mylink' name='product' id='" + x.oid + "' value='Get product List'></input></td>" +
+                                "<td>" + x.store.name + "</td>")
+                        });
+                    } else {
+
+                        $("#showorders").html("<thead><th>Order Date</th><th>Customer Details</th><th>Product Details</th><th>Store Name</th><th>Start Time</th><th>End Time</th>");
+
+                        customer_details = data;
+                        data.map((x, index) => {
+                            $("#showorders").append("<tr><td>" + x.dateOfOrder + "</td>" +
+
+                                "<td> <input type='button' class='mylink' name='customer' id='" + index + "' value='Get Customer Details'></input></td>" +
+                                "<td><input type='button'  class='mylink' name='product' id='" + x.oid + "' value='Get product List'></input></td>" +
+                                "<td>" + x.store.name + "</td>" +
+                                "<td>" + x.slots.startTime + "</td>" +
+                                "<td>" + x.slots.endTime + "</td>"
+                            )
+                        });
+                    }
+
+
                 }
-                else{
+            })
+            .fail(function (xhr, errorType, exception) {
 
-                    $("#showorders").html("<thead><th>Order Date</th><th>Customer Details</th><th>Product Details</th><th>Store Name</th><th>Start Time</th><th>End Time</th>");
-               
-                    customer_details=data;
-                    data.map((x,index)=>{$("#showorders").append("<tr><td>"+x.dateOfOrder+"</td>"+
-                    
-                           "<td> <input type='button' class='mylink' name='customer' id='"+index + "' value='Get Customer Details'></input></td>"+
-                           "<td><input type='button'  class='mylink' name='product' id='"+x.oid+"' value='Get product List'></input></td>"+
-                           "<td>"+x.store.name+"</td>"+
-                           "<td>"+x.slots.startTime+"</td>"+
-                           "<td>"+x.slots.endTime+"</td>"
-                           )});
+                if (xhr.status && xhr.status == 404) {
+                    alert("No Orders Found!!!");
+                } else if (xhr.status && xhr.status == 500) {
+                    alert("Some internal error occured!!");
                 }
-            
-  
-            }    
-        })
-        .fail(function(xhr, errorType, exception)
-        {
-            
-            if(xhr.status&&xhr.status==404)
-            {
-            alert("No Orders Found!!!");
-            }
-            else if(xhr.status&&xhr.status==500)
-            {
-                alert("Some internal error occured!!");
-            }
-        
-        });
 
+            });
+    }
     })
     $(document).on("click", 'input[type="button"]', function(event) { 
             
+
         if(event.target.name=="customer")
         {
+            $("#results1").slideToggle();
+            $("#results1").empty();
             var index=customer_details[event.target.id];
-            $("#result").html("Cusomer Details <br> Name:<b> "+index.customer.firstname+" "+index.customer.lastname
+            $("#results1").html("Cusomer Details <br> Name:<b> "+index.customer.firstname+" "+index.customer.lastname
             +"</b><br>" 
             +"Contact no:-<b> "+index.customer.contactno+"</b><br>"+
             "Address :- <br>"+
@@ -121,18 +126,19 @@ $(document).ready(function(){
         else
         {
 
-
-            $.get( "http://localhost:8085/order/products/"+event.target.id)
+            $.get( "/order/products/"+event.target.id)
         .done(function(data,status,xhr)
         {
-        
+
             if(xhr.status&&xhr.status==200)
             {
-              
-                $("#result").html("<table><thead><th>Product Name</th><th>Quantity</th></thead>");
-
-                data.map((x,index)=>{$("#result").append("<tbody><tr><td>"+x.pname+"</td><td>"+x.quantity+"</td></tbody></table>")});
-            }    
+                $("#results2").slideToggle();
+                $("#result2").empty();
+                $("#result2").html("<thead><th style='visibility:collapse;'>Id</th><th>Product Name</th><th>Actual Price</th><th>Discount Price</th><th>Quantity</th></thead>");
+                $("#result2").append("<tbody>");
+                data.map((x,index)=>{$("#result2").append("<tr><td style='visibility:collapse;'>"+x.pid+"</td><td>"+x.pname+"</td><td>"+x.pprice+"</td><td>"+x.disprice+"</td><td>"+x.quantity+"</td>")});
+                $("#result2").append("</tbody>");
+            }
         })
         .fail(function(xhr, errorType, exception)
         {

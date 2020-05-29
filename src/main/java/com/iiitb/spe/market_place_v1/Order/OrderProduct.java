@@ -24,6 +24,9 @@ public class OrderProduct {
     @Column(name="quantity",nullable = false)
     private int quantity;
 
+    @Column(name="disprice",nullable = false)
+    private double disprice;
+
     public OrderProduct() {
     }
 
@@ -57,5 +60,13 @@ public class OrderProduct {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public double getDisprice() {
+        return disprice;
+    }
+
+    public void setDisprice(double disprice) {
+        this.disprice = disprice;
     }
 }

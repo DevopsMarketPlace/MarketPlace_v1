@@ -21,7 +21,7 @@ $(document).ready(function(){
   $("#manager_name").text(qsParm["uname"]);
   var storeCount=0;
 
-  $.get( "http://localhost:8085/storemanager/stores/"+qsParm["uid"]+"/count")
+  $.get( "/storemanager/stores/"+qsParm["uid"]+"/count")
   .done(function(data,status,xhr)
   {
   
@@ -40,7 +40,7 @@ $(document).ready(function(){
   });
   
 
-  $.get( "http://localhost:8085/storemanager/stores/"+qsParm["uid"]+"/totalordercount")
+  $.get( "/storemanager/stores/"+qsParm["uid"]+"/totalordercount")
   .done(function(data,status,xhr)
   {
   
@@ -57,7 +57,7 @@ $(document).ready(function(){
   
   });
 
-  $.get( "http://localhost:8085/storemanager/stores/"+qsParm["uid"]+"/ordercount/type")
+  $.get( "/storemanager/stores/"+qsParm["uid"]+"/ordercount/type")
   .done(function(data,status,xhr)
   {
   
@@ -76,7 +76,7 @@ $(document).ready(function(){
   
   });
 
-  $.get( "http://localhost:8085/storemanager/stores/inventory/"+qsParm["uid"])
+  $.get( "/storemanager/stores/inventory/"+qsParm["uid"])
   .done(function(data,status,xhr)
   {
   

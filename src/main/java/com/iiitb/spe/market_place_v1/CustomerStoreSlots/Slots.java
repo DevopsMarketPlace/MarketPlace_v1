@@ -19,21 +19,22 @@ public class Slots {
     private int sid;
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "order_id")
     private Order order;
 
    @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "store_id")
     private Store store;
 
     @Temporal(value = TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm")
     @Column(name="start_time")
     private Date startTime;
 
     @Temporal(value = TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata",pattern = "hh:mm")
     @Column(name="end_time")
     private Date endTime;
 
@@ -72,5 +73,13 @@ public class Slots {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

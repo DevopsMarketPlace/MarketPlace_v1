@@ -80,7 +80,7 @@ else if(e.target.name=="updatestore")
         'Accept': 'application/json'
     } });
 
-    $.post( "http://localhost:8085/store/"+storeManager,JSON.stringify(data) )
+    $.post( "/store/"+storeManager,JSON.stringify(data) )
         .done(function(data,status,xhr){
         
          if(xhr.status&&xhr.status==200)

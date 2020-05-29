@@ -1,5 +1,8 @@
 package com.iiitb.spe.market_place_v1.Customer;
 
+import com.iiitb.spe.market_place_v1.Order.Order;
+import com.iiitb.spe.market_place_v1.Order.OrderService;
+import com.iiitb.spe.market_place_v1.Product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,9 @@ import java.util.List;
 public class CustomerService {
     @Autowired
     private CustomerRepo customerRepo;
+
+    @Autowired
+    private OrderService orderService;
 
     public Customer addCustomer(Customer c) {
         return customerRepo.save(c);
@@ -40,6 +46,11 @@ public class CustomerService {
         List<Customer> result = new ArrayList<Customer>();
         customerRepo.findAll().forEach(result::add);
         return result;
+    }
+    public Order fetchOrderById(int oid) {
+
+        Order order = orderService.fetchOrderById(oid);
+        return order;
     }
 }
 
