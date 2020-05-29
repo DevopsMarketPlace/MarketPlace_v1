@@ -26,7 +26,7 @@ $(document).ready(function(){
     var storeManager=qsParm['uid'];
     var storeList=[];
 
-    $.get( "http://localhost:8085/storemanager/stores/"+storeManager)
+    $.get( "/storemanager/stores/"+storeManager)
         .done(function(data,status,xhr)
         {
         
@@ -82,7 +82,7 @@ $(document).ready(function(){
   {
 
     var sid=$("#sid").val();
-    $.ajax({url: "http://localhost:8085/store/"+sid,
+    $.ajax({url: "/store/"+sid,
          type: 'DELETE',
     })
     .done(function(data,status,xhr)
@@ -150,7 +150,7 @@ var name = $("#name").val();
                 } });
         
                 $.ajax({
-                        url:"http://localhost:8085/store/"+storeManager,
+                        url:"/store/"+storeManager,
                         data:JSON.stringify(data),
                         type:"PUT"
                     })

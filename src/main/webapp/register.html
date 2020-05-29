@@ -84,7 +84,7 @@
           }
        });
 
-      $.post( "http://localhost:8085/customer",JSON.stringify(data1) )
+      $.post( "/customer",JSON.stringify(data1) )
         .done(function(data,status,xhr){
         
          if(xhr.status&&xhr.status==200)
@@ -125,7 +125,7 @@
         'Accept': 'application/json'
     }
       });
-      $.post( "http://localhost:8085/storemanager",JSON.stringify(data) )
+      $.post( "/storemanager",JSON.stringify(data) )
         .done(function(data,status,xhr){
         
          if(xhr.status&&xhr.status==200)

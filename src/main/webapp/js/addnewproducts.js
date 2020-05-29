@@ -25,7 +25,7 @@ $(document).ready(function(){
     var storeManager=qsParm['uid'];
     var storeList=[];
 
-    $.get( "http://localhost:8085/storemanager/stores/"+storeManager)
+    $.get( "/storemanager/stores/"+storeManager)
         .done(function(data,status,xhr)
         {
         
@@ -112,7 +112,7 @@ $(document).ready(function(){
                } });
           
           
-          $.post( "http://localhost:8085/product/"+store_selection,JSON.stringify(data) )
+          $.post( "/product/"+store_selection,JSON.stringify(data) )
           .done(function(data,status,xhr){
           
            if(xhr.status&&xhr.status==200)

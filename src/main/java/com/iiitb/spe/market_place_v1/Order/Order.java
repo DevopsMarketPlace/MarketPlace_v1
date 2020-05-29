@@ -6,6 +6,8 @@ import com.iiitb.spe.market_place_v1.CustomerStoreSlots.Slots;
 import com.iiitb.spe.market_place_v1.Store.Store;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class Order {
 
     @JsonIgnore
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderProduct> orderProductList;
+    private List<OrderProduct> orderProductList=new ArrayList<OrderProduct>();
 
 
     @OneToOne(mappedBy = "order",cascade = CascadeType.ALL)

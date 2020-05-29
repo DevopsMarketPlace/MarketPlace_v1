@@ -24,7 +24,7 @@ public class Slots {
     private Order order;
 
    @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "store_id")
     private Store store;
 

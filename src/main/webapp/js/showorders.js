@@ -19,7 +19,7 @@ $(document).ready(function(){
     var storeManager=qsParm['uid'];
     var storeList=[];
 
-    $.get( "http://localhost:8085/storemanager/stores/"+storeManager)
+    $.get( "/storemanager/stores/"+storeManager)
         .done(function(data,status,xhr)
         {
         
@@ -59,7 +59,7 @@ $(document).ready(function(){
 
 
 
-        $.get("http://localhost:8085/storemanager/" + storeManager + "/store/" + store + "/orders/" + deltype)
+        $.get("/storemanager/" + storeManager + "/store/" + store + "/orders/" + deltype)
             .done(function (data, status, xhr) {
 
                 if (xhr.status && xhr.status == 200) {
@@ -126,7 +126,7 @@ $(document).ready(function(){
         else
         {
 
-            $.get( "http://localhost:8085/order/products/"+event.target.id)
+            $.get( "/order/products/"+event.target.id)
         .done(function(data,status,xhr)
         {
 

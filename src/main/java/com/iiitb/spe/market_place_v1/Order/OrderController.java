@@ -63,4 +63,10 @@ public class OrderController {
         orderService.updateOrder(existingOrder,startTime,endTime,type);
     }
 
+    @PostMapping("/order")
+    public int createOrder(@RequestParam("cid") int cid,@RequestParam("sid") int sid,@RequestParam("prodlist") List<Integer> prodList,@RequestParam("quantity") List<Integer> quantity,@RequestParam("dislist") List<Double> dislist)
+    {
+        return orderService.newOrder(cid,sid,prodList,quantity,dislist);
+    }
+
 }
