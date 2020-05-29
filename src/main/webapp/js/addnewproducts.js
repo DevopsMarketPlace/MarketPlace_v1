@@ -52,18 +52,18 @@ $(document).ready(function(){
 
         $("#tablebody").append("<tr>"+
             
-            "<td><input type='text' placeholder='Enter product name' /></td>"+
-            "<td><input type='number' min='0' value='0' step='0.01' placeholder='Enter product price' /></td>"+"<td><input type='number' step='0.01' required value='0.00' plceholder='Enter discounted price' /></td>"+
-            "<td><input type='number' step='1' min='0' value='0' placeholder='Enter qauntity'/></td>"+ 
+            "<td><input class='form-control' required type='text' placeholder='Enter product name' /></td>"+
+            "<td><input class='form-control' required type='number' min='0' value='0' step='0.01' placeholder='Enter product price' /></td>"+"<td><input type='number' required  class='form-control' step='0.01' required value='0.00' plceholder='Enter discounted price' /></td>"+
+            "<td><input class='form-control' required type='number' step='1' min='0' value='0' placeholder='Enter qauntity'/></td>"+
             "</tr>");
 
         $("#addrow").click(function(){
 
             $("#tablebody").append("<tr>"+
             
-            "<td><input type='text' placeholder='Enter product name' /></td>"+
-            "<td><input type='number' min='0' value='0' step='0.01' placeholder='Enter product price' /></td>"+"<td><input type='number' step='0.01' required value='0.00' plceholder='Enter discounted price' /></td>"+
-            "<td><input type='number' step='1' min='0' value='0' placeholder='Enter qauntity'/></td>"+ 
+            "<td><input required class='form-control' type='text' placeholder='Enter product name' /></td>"+
+            "<td><input required class='form-control'  type='number' min='0' value='0' step='0.01' placeholder='Enter product price' /></td>"+"<td><input required type='number' class='form-control' step='0.01' required value='0.00' plceholder='Enter discounted price' /></td>"+
+            "<td><input required class='form-control' type='number' step='1' min='0' value='0' placeholder='Enter qauntity'/></td>"+
             "</tr>");
         });
 

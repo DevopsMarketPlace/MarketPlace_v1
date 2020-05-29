@@ -22,18 +22,18 @@ public class Order {
     private Date dateOfOrder;
 
     @Column(name="status",nullable = false)
-    private byte status; //1-placed ,2:- in processing, 3:-in delivered
+    private byte status; //1-placed ,2:- in processing, 3:-in delivered 4 :add to cart
 
     @ManyToOne
     @JoinColumn(name="customer_id")
     private Customer customer;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderProduct> orderProductList;
 
 
-    @OneToOne(mappedBy = "order")
+    @OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
     private Slots slots;
 
 

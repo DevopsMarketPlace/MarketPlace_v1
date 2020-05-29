@@ -54,7 +54,7 @@ public class StoreService {
         return storeRepository.fetchOrders(id);
     }
 
-    public Store fetchOrderListByType(String type){return storeRepository.fetchOrdersByType(type);}
+    public Store fetchOrderListByType(String type,int sid){return storeRepository.fetchOrdersByType(type,sid);}
 
     public List<Store> fetchStorebyPincode(String pincode)
     {
@@ -69,5 +69,10 @@ public class StoreService {
     public Store fetchProductStoreListByQuantity(int id,int quantity)
     {
         return storeRepository.fetchProductStoreListByQuantity(id,quantity);
+    }
+
+    public Store fetchSlots(int sid)
+    {
+        return storeRepository.fetchSlotList(sid);
     }
 }

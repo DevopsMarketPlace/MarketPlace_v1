@@ -12,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -178,5 +180,21 @@ public class StoreController {
         }).collect(Collectors.toList());
 
     }
+
+    @GetMapping("/store/slots/{sid}")
+    public List<Date> getSlots(@PathVariable("sid") int sid)
+    {
+        Store s=storeService.fetchSlots(sid);
+        List<Date> response=new ArrayList<Date>();
+        if(s==null)
+        {
+            return response;
+        }
+
+        s.getSlotsList().forEach(x->response.add(x.getStartTime()));
+       return response;
+    }
+
+
 
 }

@@ -43,7 +43,7 @@ public class Store {
     //in minutes
 
     @JsonIgnore
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store",cascade = CascadeType.ALL)
     private List<Slots> slotsList;
 
     @JsonIgnore //for fetching stores due to lazy fetch--aayush

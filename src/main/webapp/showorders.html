@@ -168,15 +168,14 @@
           <h1 class="h3 mb-4 text-gray-800">Show Orders</h1>
           <br>
           <div class="row">
-              <div class='col-xl-4'>
-          <label>Select a particular store: </label>
-          <select id="storelist">
-              
+              <div class='col-xl-4 form-group'>
+          <select id="storelist" class="form-control">
+              <option value="-1">Select Store</option>
           </select>
           </div>
-          <div class='col-xl-4'>
-            <label>Select a Delivery Type: </label>
-          <select id="deltype" value='delivery'>
+          <div class='col-xl-4 form-group'>
+
+          <select id="deltype" value='delivery' class="form-control">
               
               <option value='delivery'>Delivery</option>
               <option value='pickup'>Pick Up</option>
@@ -191,7 +190,7 @@
           <hr/>
           
           <div class="card-body">
-            <div class="table-responsive" style='overflow-y: scroll; height: 300px;'>
+            <div class="table-responsive" style='overflow-y: scroll; height: 200px;'>
               <table class="table table-bordered" width="100%" cellspacing="0" id="showorders">
                
              
@@ -200,8 +199,24 @@
                 </table>
                 
                 </div>
-                <div id="result"></div>
+
                 </div>
+            <div class="row">
+                <div class="col-lg-4">
+            <div  style='display: none;' id="results1">
+            </div>
+                </div>
+                <div class="col-lg-8">
+            <div  style='display: none;' id="results2">
+                <table class="table table-bordered" width="100%" cellspacing="0" id="result2">
+
+
+
+
+                </table>
+            </div>
+                </div>
+            </div>
                
 
 

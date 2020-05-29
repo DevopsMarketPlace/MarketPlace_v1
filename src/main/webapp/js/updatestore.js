@@ -82,7 +82,6 @@ $(document).ready(function(){
   {
 
     var sid=$("#sid").val();
-    alert(sid);
     $.ajax({url: "http://localhost:8085/store/"+sid,
          type: 'DELETE',
     })
