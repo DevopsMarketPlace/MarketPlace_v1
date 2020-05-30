@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,9 +65,13 @@ public class OrderController {
     }
 
     @PostMapping("/order")
-    public int createOrder(@RequestParam("cid") int cid,@RequestParam("sid") int sid,@RequestParam("prodlist") List<Integer> prodList,@RequestParam("quantity") List<Integer> quantity,@RequestParam("dislist") List<Double> dislist)
+    public int createOrder(@RequestParam("cid") int cid,@RequestParam("sid") int sid,@RequestParam("prodlist") String prodList,@RequestParam("quantity") String quantity,@RequestParam("dislist") String dislist)
     {
-        return orderService.newOrder(cid,sid,prodList,quantity,dislist);
+        String[] prod_temp=prodList.split("_");
+        String[] quantity_temp=quantity.split("_");
+        String[] dislist_temp=dislist.split("_");
+
+        return orderService.newOrder(cid,sid, Arrays.asList(prod_temp),Arrays.asList(quantity_temp), Arrays.asList(dislist_temp));
     }
 
 }

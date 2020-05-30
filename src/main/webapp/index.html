@@ -27,6 +27,17 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+      .mylink {
+        background-color: Transparent;
+        background-repeat:no-repeat;
+        border: none;
+        cursor:pointer;
+        overflow: hidden;
+        outline:none;
+        color: blue;
+    }
+      </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
       $(document).ready(function(){
@@ -42,19 +53,19 @@
   <body class="goto-here">
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
       <div class="container">
-        <a class="navbar-brand" href="index.html">Local Market Place</a>
+        <div class="navbar-brand">Local Market Place</div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span> Menu
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-            <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span></a></li>
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><button name='home' class="mylink nav-link">Home</button></li>
 
-          </ul>
-        </div>
+			  <li class="nav-item"><button name='logout' class="mylink nav-link">Logout</button></li>
+
+	        </ul>
+	      </div>
       </div>
     </nav>
     <!-- END nav -->
@@ -63,7 +74,7 @@
 
     <section id="home-section" class="hero">
       <div class="home-slider owl-carousel">
-        <div class="slider-item" style="background-image: url(/assets/img/main.jpg);">
+        <div class="slider-item" style="background-image: url(./assets/img/main.jpg);">
           <div class="overlay"></div>
           <div class="container">
             <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
@@ -93,13 +104,18 @@
       </div>
     </section>
     <br><br><br>
-
-    <form onlick="./store.html" align="center" class="form-group ">
-      <input id="pincode_value" class="form-control" type="text" placeholder="Enter Pin Code" aria-label="Search">
-      <br>
-      <button  type="button" id="pincode" class="btn btn-primary">Submit</button>
-    </form>
-
+    <div class='row'>
+      <div class='col-lg-4'></div>
+      <div class='col-lg-4' >
+       
+          <input id="pincode_value" class="form-control" type="text" placeholder="Enter Pin Code" aria-label="Search">
+          <br>
+          <button  type="button" id="pincode" class="btn btn-primary">Submit</button>
+       
+    </div>
+    <div class='col-lg-4'></div>
+    </div>
+    
 
 
 
@@ -170,6 +186,7 @@
       </div>
     </footer>
     
+      <!-- Logout Modal-->
   
 
   <!-- loader -->
@@ -192,8 +209,9 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/header.js"></script>
 
-  <!-- <script src="js/fetchdata.js"></script> -->
+  <script src="js/fetchdata.js"></script>
     
   </body>
 </html>

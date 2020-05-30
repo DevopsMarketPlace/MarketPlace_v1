@@ -64,11 +64,11 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public int newOrder(int cid,int sid,List<Integer> prodList,List<Integer> quantity,List<Double> dislist)
+    public int newOrder(int cid,int sid,List<String> prodList,List<String> quantity,List<String> dislist)
     {
         Customer c=customerService.fetchCustomer(cid);
         Store s=storeService.fetchStoreById(sid);
-        List<Product> productList= prodList.parallelStream().map(x->{return productService.fetchProductById(x);}).collect(Collectors.toList());
+        List<Product> productList= prodList.parallelStream().map(x->{return productService.fetchProductById(Integer.parseInt(x));}).collect(Collectors.toList());
         Order o=new Order();
         List<ProductStore> productStoreList=s.getProductStoreList();
         o.setCustomer(c);
@@ -80,8 +80,8 @@ public class OrderService {
         for(Product p:productList)
         {
             OrderProduct op=new OrderProduct();
-            op.setQuantity(quantity.get(i));
-            op.setDisprice(dislist.get(i));
+            op.setQuantity(Integer.parseInt(quantity.get(i)));
+            op.setDisprice(Double.parseDouble(dislist.get(i)));
             i++;
             op.setProduct(p);
             op.setOrder(o);
@@ -94,7 +94,7 @@ public class OrderService {
            productList.parallelStream().forEach(y->{
                if(x.getProduct().getPid()==y.getPid())
                {
-                   x.setQuantity(x.getQuantity()-quantity.get(j.get()));
+                   x.setQuantity(x.getQuantity()-Integer.parseInt(quantity.get(j.get())));
 
                }
                j.getAndIncrement();

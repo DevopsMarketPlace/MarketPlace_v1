@@ -37,7 +37,7 @@ $(document).ready(function(){
                   '<div class="card-body">'+
                      '<div class="row no-gutters align-items-center">'+
                       '<div class="col mr-2">'+
-                      '<div class="h5 mb-0 font-weight-bold text-gray-800" id="pickups"><img class="img-fluid" src="assets/img/store.png" alt="Colorlib Template"></div>'+
+                      '<div class="h5 mb-0 font-weight-bold text-gray-800" id="pickups"><img class="img-fluid" src="/assets/img/store.png" alt="Colorlib Template"></div>'+
                       '<br><div class="text-xs font-weight-bold text-warning text-uppercase mb-1">'+'<input type="button" class="mylink" name="storelink" id="'+x.sid+'" value="'+x.name+'"> </input>'+'</div>'+
                         
                        '</div>'+
@@ -53,7 +53,9 @@ $(document).ready(function(){
             
             if(xhr.status&&xhr.status==404)
             {
-            alert("Backend Not working");
+            alert("No stores Found");
+            $(location).attr('href',"index.html?cid="+qsParm["cid"]);
+
             }
             else if(xhr.status&&xhr.status==500)
             {
@@ -64,8 +66,8 @@ $(document).ready(function(){
     
         $(document).on("click", 'input[type="button"]', function(event) { 
         
-
-           $(location).attr('href',"products.html?sid="+event.target.id);
+           
+           $(location).attr('href',"products.html?cid="+qsParm['cid']+"&sid="+event.target.id);
 
         });
     

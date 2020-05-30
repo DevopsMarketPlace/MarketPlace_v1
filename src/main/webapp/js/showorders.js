@@ -100,7 +100,7 @@ $(document).ready(function(){
                 if (xhr.status && xhr.status == 404) {
                     alert("No Orders Found!!!");
                 } else if (xhr.status && xhr.status == 500) {
-                    alert("Some internal error occured!!");
+                    alert("No orders Found!!");
                 }
 
             });

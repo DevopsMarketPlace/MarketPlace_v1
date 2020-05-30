@@ -33,6 +33,17 @@
      <!-- <script src="store.js" ></script> -->
        <script src="js/jquery.min.js"></script>
   <script src="js/productslist.js"></script>
+  <style>
+    button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color: white;
+}
+  </style>
 
   </head>
   <body class="goto-here">
@@ -45,22 +56,22 @@
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-            <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span></a></li>
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><button name='home' class="mylink nav-link">Home</button></li>
 
-          </ul>
-        </div>
+			  <li class="nav-item"><button name='logout' class="mylink nav-link">Logout</button></li>
+
+	        </ul>
+	      </div>
       </div>
     </nav>
     <!-- END nav -->
 
-    <div class="hero-wrap hero-bread" style="background-image: url('/assets/img/main.jpg');">
+    <div class="hero-wrap hero-bread" style="background-image: url('assets/img/main.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span></p>
+            <p class="breadcrumbs"><span class="mr-2">Home</span> <span>Products</span></p>
             <h1 class="mb-0 bread">Products</h1>
           </div>
         </div>
@@ -124,7 +135,7 @@
                 <strong class="cart-total-title">Total</strong>
                 <span class="cart-total-price">Rs0</span>
             </div>
-            <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+            <button class="btn btn-primary btn-purchase" id="proceed" type="button">Proceed</button>
         </section>
 
     
@@ -150,6 +161,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/header.js"></script>
  
 
     

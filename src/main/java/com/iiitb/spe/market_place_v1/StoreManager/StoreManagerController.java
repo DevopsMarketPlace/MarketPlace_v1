@@ -239,7 +239,11 @@ public class StoreManagerController {
             return response;
         }
 
-        List<Order>orders =s.getOrderList().parallelStream().filter(x->x.getOrder_type().equals(type)).collect(Collectors.toList());
+        List<Order>orders =s.getOrderList().parallelStream().filter(x->{
+            if(x.getOrder_type()!=null)
+            return x.getOrder_type().equals(type);
+        return false;
+        }).collect(Collectors.toList());
 
         response.addAll(orders);
         logger.info("Order by Type Fetched Type="+type);
