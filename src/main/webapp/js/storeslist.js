@@ -21,7 +21,7 @@ $(document).ready(function(){
 
    
     var storeList=[];
-    $.get( "http://localhost:8085/store/bypincode/"+pincode)
+    $.get( "/store/bypincode/"+pincode)
         .done(function(data,status,xhr)
         {
         

@@ -56,7 +56,7 @@ $(document).ready(function(){
                } });
           
           
-          $.post( "http://localhost:8085/products",JSON.stringify(data) )
+          $.post( "/products",JSON.stringify(data) )
           .done(function(data,status,xhr){
           
            if(xhr.status&&xhr.status==200)

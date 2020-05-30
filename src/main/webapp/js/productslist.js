@@ -65,7 +65,7 @@ function purchaseClicked() {
         dislist:priceList
     }
     var oid;
-    $.post( "http://localhost:8085/order",data )
+    $.post( "/order",data )
         .done(function(data,status,xhr){
         
          if(xhr.status&&xhr.status==200)
@@ -178,7 +178,7 @@ function updateCartTotal() {
     var productList=[];
 
     // $.get( "http://localhost:8085/storemanager/stores/"+storeManager)
-    $.get( "http://localhost:8085/store/product/"+qsParm["sid"])
+    $.get( "/store/product/"+qsParm["sid"])
         .done(function(data,status,xhr)
         {
             if(xhr.status&&xhr.status==200)

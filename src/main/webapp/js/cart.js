@@ -29,7 +29,7 @@ $(document).ready(function(){
     var subtotal=0;
     var storedata;
 
-    $.get( "http://localhost:8085/customer/"+customer+"/order/"+orderid)
+    $.get( "/customer/"+customer+"/order/"+orderid)
   .done(function(data,status,xhr)
   {
   
@@ -58,7 +58,7 @@ $(document).ready(function(){
   
   });
 
-  $.get( "http://localhost:8085/order/products/"+orderid)
+  $.get( "/order/products/"+orderid)
   .done(function(data,status,xhr)
   {
   
@@ -110,7 +110,7 @@ $(document).ready(function(){
         $("#slots").slideDown();
         $("#slotdetails").empty();
     
-        $.get( "http://localhost:8085/store/slots/"+storedata.sid)
+        $.get( "/store/slots/"+storedata.sid)
             .done(function(data,status,xhr)
             {
             
@@ -191,7 +191,7 @@ $(document).ready(function(){
     }
     else if(event.target.name=="delete")
     {
-        $.ajax({url: "http://localhost:8085/order/"+orderid,
+        $.ajax({url: "/order/"+orderid,
          type: 'DELETE',
          })
         .done(function(data,status,xhr)
@@ -260,7 +260,7 @@ $(document).ready(function(){
 
             
             $.ajax({
-                url:"http://localhost:8085/order/"+orderid,
+                url:"/order/"+orderid,
                 data:request,
                 type:"PUT"
             })
